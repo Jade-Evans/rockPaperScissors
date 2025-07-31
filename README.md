@@ -14,3 +14,10 @@ Practice pseudocode and JS - Odin Project Fdn Exercise.
     - IF num is equal to 1, output "PC chose rock".
     - ELSE IF num is equal to 2, output "PC chose paper".
     - ELSE IF num is equal to 3, output "PC chose scissors".
+
+# Step 3: Write the logic to get the human/user's choice #
+
+- Define a function called getHumanChoice.
+- Use the prompt() method with a message requesting user input "rock", "paper" or "scissors" (*do not worry about invalid input for this exercise at this stage*).
+- Store the user's input to the prompt as a variable **humanChoice**.
+- Use console.log to output a message which automatically inputs the user's response using template literals. 
