@@ -1,25 +1,25 @@
 
 
-    const getComputerChoice = function(){
+    const getcomputerAnswer = function(){
         let num = Math.ceil(Math.random()*3);
-        let computerChoice;
+        let computerAnswer;
         if(num === 1){
-            computerChoice = "rock";
+            computerAnswer = "rock";
         }
         else if(num ===2){
-            computerChoice = "paper";  
+            computerAnswer = "paper";  
         }
         else if(num === 3){
-            computerChoice = "scissors";
+            computerAnswer = "scissors";
         }
-        return computerChoice;
+        return computerAnswer;
     
     };
     
 
     const getHumanChoice = function(){
-        let humanChoice = prompt("Choose rock, paper or scissors").toLowerCase();
-        return humanChoice;
+        let humanAnswer = prompt("Choose rock, paper or scissors").toLowerCase();
+        return humanAnswer;
     };
   
     
@@ -29,27 +29,28 @@ let humanScore = 0;
 let computerScore = 0;
 
 //5. CREATE PLAYROUND FUNCTION. 
-const playRound = function(humanMove, pcMove) {
-        if(humanMove === pcMove){
-            console.log("Its a draw");
+const playRound = function(humanChoice, computerChoice) {
+        if(humanChoice === computerChoice){
+            console.log(`It's a draw: both players chose ${humanChoice}`);
         }
-        else if(humanMove=="rock" && pcMove == "scissors" || humanMove == "paper" && pcMove == "rock" || humanMove == "scissors" && pcMove == "paper"){
-            console.log(`Human choice is ${humanMove} & PC choice is ${computerChoice}: Human wins`);
+        else if(humanChoice=="rock" && computerChoice == "scissors" || humanChoice == "paper" && computerChoice == "rock" || humanChoice == "scissors" && computerChoice == "paper"){
+            console.log(`Human choice is ${humanChoice} & PC choice is ${computerChoice}: Human wins`);
             humanScore +=1;
         }
         else{
-            console.log(`Human choice is ${humanMove} & PC choice is ${pcMove}: PC wins`);
+            console.log(`Human choice is ${humanChoice} & PC choice is ${computerChoice}: PC wins`);
             computerScore +=1;
         }
         console.log(`The score for this round: human score is ${humanScore}, pc score is ${computerScore}`)
     // your code here!
 };
 
+//STORES THE ANSWERS FROM EARLIER AS VARIABLES TO BE USED IN PLAYROUND PARAMETERS. 
 const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+const computerSelection = getcomputerAnswer();
 
 
-
+//CALLS THE FUNCTION TO PLAY ONE ROUND
 playRound(humanSelection, computerSelection);
 
 
