@@ -37,4 +37,13 @@ Practice pseudocode and JS - Odin Project Fdn Exercise.
     - IF the choices match: output it's a draw  message using console.log.
     - ELSE IF the choices result in the human winning (aka human gets rock and pc gets scissors etc.): output a message using console.log to say human wins AND increment humanScore by 1. 
     - ELSE the remaining choices will result in a win for the pc, so output message to declare this AND increment computer score by 1. 
-- Use console.log at the end of the function to declare the scores for each player. 
+- Use console.log at the end of the function to declare the scores for each player.
+
+# Step 6: Write the logic to play the entire game (5 rounds in total) #
+- Creat a function named playGame.
+- Make sure the playRound function and scores are inside playGame().
+- Use a for loop to call playRound 5 times, starting at 1 and condition is i less than or equal to 5. 
+OPTIONAL:
+- Use if...else to declare who is the winner at the end of the five rounds. 
+- Use a prompt to ask the player if they want to play again.
+- Use an alert within the loop to announce each round (spaces it out a bit pace-wise).
