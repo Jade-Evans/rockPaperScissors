@@ -48,27 +48,7 @@ const playGame = function(){
            
             
         };
-    
-        for (let i=1; i<=5; i++){   
-            alert(`Ready for ROUND ${i}?`); 
-            //STORES THE ANSWERS FROM EARLIER AS VARIABLES TO BE USED IN PLAYROUND PARAMETERS. 
-            const humanSelection = getHumanChoice();
-            const computerSelection = getcomputerAnswer();
-             //CALLS THE FUNCTION TO PLAY ONE ROUND
-            
-            playRound(humanSelection, computerSelection);
-        };
-
-        if(humanScore > computerScore){
-            alert(`Human final score:${humanScore}, computer final score: ${computerScore} - Human is the winner!`);
-        }
-        else if (computerScore > humanScore){
-            alert(`Human final score:${humanScore}, computer final score: ${computerScore} - Computer is the winner!`);
-        }
-        else{
-            alert(`Human final score:${humanScore}, computer final score: ${computerScore} - It's a draw!`);
-        };
-
+        
         
         
     let playAgain = prompt("would you like to play again?: yes/no");
