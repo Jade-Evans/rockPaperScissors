@@ -27,7 +27,13 @@
         resultsAnnouncement.appendChild(result);
         let scoreSummary = document.createElement("p");
         scoreSummary.textContent = `The scores a the end of this round: human score is ${humanScore}, pc score is ${computerScore}`;
-        resultsAnnouncement.appendChild(scoreSummary);       
+        resultsAnnouncement.appendChild(scoreSummary);    
+        let playAgain = document.createElement("button");
+        playAgain.textContent = "Play Again";
+        let exit = document.createElement("button");
+        exit.textContent = "Exit";
+        resultsAnnouncement.appendChild(playAgain); 
+        resultsAnnouncement.appendChild(exit); 
     };  
 
 
