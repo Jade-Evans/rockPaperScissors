@@ -1,0 +1,33 @@
+*{margin: 0px;
+display: border-box;
+}
+body{
+    background-color: rgb(118, 24, 127);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: lighter;
+    color:blanchedalmond;
+}
+.contentContainer{
+    background-color: rgb(233, 108, 231);
+    border: 2px solid blanchedalmond;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+    
+    
+}
+.choiceButtonContainer{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px;
+}
+.choiceButton{
+    background-color: lightblue;
+    padding: 8px;
+    border-radius: 8px;
+}
