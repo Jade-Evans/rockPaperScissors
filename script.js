@@ -18,19 +18,30 @@
         readyHeader.remove();
         enterNameForm.remove();
         errorMessage.remove();
-        gameIcon.style.width = "70px";
+        gameIcon.style.width = "80px";
         const welcomeText = document.createElement("p");
-        welcomeText.textContent = `Welcome, ${inputPlayerName.value}!`;
+        welcomeText.textContent = `Welcome, ✨🌸${inputPlayerName.value}✨🌸!`;
+        welcomeText.style.fontSize = "32px";
         const chooseThemePrompt = document.createElement("p");
         chooseThemePrompt.textContent = "Please choose a theme from the options below:";
         welcomeContainer.appendChild(welcomeText);
         welcomeContainer.appendChild(chooseThemePrompt);
         const traditionalTheme = document.createElement("button");
-        traditionalTheme.textContent = "Traditional Game";
+        traditionalTheme.textContent = "🗿📄✂️Traditional";
+        welcomeContainer.appendChild(traditionalTheme);
         const magicalTheme = document.createElement("button");
         const dinosaurTheme = document.createElement("button");
-    
-    
+        const heroTheme = document.createElement("button");
+        heroTheme.textContent = "🟩 🕷️ 🤖Marvel Universe";
+        welcomeContainer.appendChild(heroTheme);
+        magicalTheme.textContent = "🦄🧚🧜‍♀️Magic Kingdom";
+        welcomeContainer.appendChild(magicalTheme);
+        dinosaurTheme.textContent = "🦕⛰️Dinosaur Mountain";
+        welcomeContainer.appendChild(dinosaurTheme);
+        traditionalTheme.classList.add("themeButton");
+        dinosaurTheme.classList.add("themeButton");
+        magicalTheme.classList.add("themeButton");
+        heroTheme.classList.add("themeButton");
     }
 
     })

@@ -50,3 +50,22 @@ OPTIONAL:
 
 LEARNING LOG:
 - preventDefault() to stop the submit automatically refreshing the page and removing the welcome message instantly. 
+
+🦕 Real Dinosaur Trio
+- Triceratops — the horned herbivore with a protective frill. Great for a “defender” archetype.
+- Velociraptor — small, fast, and clever. Perfect for a “trickster” or “speedster” role.
+- Stegosaurus — the spiky-backed tank with a tiny brain but serious tail power. Ideal for a “brute” or “wild card.”
+You could build a loop like:
+- Velociraptor outsmarts Stegosaurus
+- Stegosaurus overpowers Triceratops
+- Triceratops defends against Velociraptor
+🦸‍♀️🦸‍♂️ Marvel Trio Ideas
+Here are a few themed trio sets with circular logic built in:
+💥 Strength vs Speed vs Strategy
+- Hulk — raw power
+- Spider-Man — agility and reflexes
+- Iron Man — tech and tactics
+Loop logic:
+- Hulk smashes Spider-Man
+- Spider-Man outmaneuvers Iron Man
+- Iron Man outsmarts Hulk

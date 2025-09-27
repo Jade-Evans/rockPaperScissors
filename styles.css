@@ -5,11 +5,11 @@ body{
     background-color: rgb(118, 24, 127);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: lighter;
-    color:blanchedalmond;
+    color: white;
 }
 .contentContainer{
-    background-color: rgb(233, 108, 231);
-    border: 2px solid blanchedalmond;
+    background-color: pink;
+    border: 2px solid white;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
@@ -22,6 +22,7 @@ body{
 #gameIcon{
     max-width: 150px;
     border: solid 3px pink;
+    border-radius: 50%;
 }
 .enterName{
     display: flex;
@@ -39,9 +40,12 @@ body{
     gap: 30px;
     margin: 20px;
 } */
-.choiceButton{
+.themeButton, .choiceButton{
     background-color: rgb(210, 163, 246);
+    color: purple;
     padding: 8px;
     border-radius: 8px;
     font-size: 20px;
+    margin: 10px;
+    border: 2px white solid;
 }
