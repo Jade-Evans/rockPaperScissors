@@ -47,3 +47,6 @@ OPTIONAL:
 - Use if...else to declare who is the winner at the end of the five rounds. 
 - Use a prompt to ask the player if they want to play again.
 - Use an alert within the loop to announce each round (spaces it out a bit pace-wise).
+
+LEARNING LOG:
+- preventDefault() to stop the submit automatically refreshing the page and removing the welcome message instantly. 
