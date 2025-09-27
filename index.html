@@ -8,12 +8,15 @@
 </head>
 <body>
     <div class="contentContainer">
-        <h1>Welcome to Rock, Paper, Scissors!</h1>
+        <h1>Are you ready to play Rock, Paper, Scissors?!</h1>
+        <img src="rockPaperScissorsIcon.png" id="gameIcon">
+        
         
         <p>Before we begin, please enter your player name and press ENTER:</p>
         <form id="enterName">
             <label for="playerName"></label>
-            <input type="text" id="inputPlayerName" name="playerName">
+            <input type="text" id="inputPlayerName" name="playerName" minlength="2"
+            maxlength="12">
             <input type="submit" value="ENTER" id="submitPlayerNameButton"/>
         </form>
         <div class="welcomeContainer"></div>
