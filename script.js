@@ -1,14 +1,23 @@
     const submitPlayerNameButton = document.querySelector("#submitPlayerNameButton");
     const inputPlayerName = document.querySelector("#inputPlayerName");
     const welcomeContainer = document.querySelector(".welcomeContainer");
+    const errorMessage = document.createElement("p");
+    errorMessage.textContent = "Error: please enter name to continue";
+    errorMessage.style.color = "red";
     submitPlayerNameButton.addEventListener("click",()=>{
         event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
+        if(!inputPlayerName.value){
+            
+            welcomeContainer.appendChild(errorMessage);
+        }
+        else{
+        errorMessage.remove();
         const welcomeText = document.createElement("p");
         welcomeText.textContent = `Welcome, ${inputPlayerName.value}!`;
         const chooseThemePrompt = document.createElement("p");
         chooseThemePrompt.textContent = "Please choose a theme from the options below:";
         welcomeContainer.appendChild(welcomeText);
-        welcomeContainer.appendChild(chooseThemePrompt);
+        welcomeContainer.appendChild(chooseThemePrompt);}
 
     })
     
