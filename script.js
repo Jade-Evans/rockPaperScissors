@@ -1,3 +1,7 @@
+    
+    const readyHeader = document.querySelector("#readyHeader");
+    const gameIcon = document.querySelector("#gameIcon");
+    const enterNameForm = document.querySelector("#enterNameForm");
     const submitPlayerNameButton = document.querySelector("#submitPlayerNameButton");
     const inputPlayerName = document.querySelector("#inputPlayerName");
     const welcomeContainer = document.querySelector(".welcomeContainer");
@@ -11,13 +15,23 @@
             welcomeContainer.appendChild(errorMessage);
         }
         else{
+        readyHeader.remove();
+        enterNameForm.remove();
         errorMessage.remove();
+        gameIcon.style.width = "70px";
         const welcomeText = document.createElement("p");
         welcomeText.textContent = `Welcome, ${inputPlayerName.value}!`;
         const chooseThemePrompt = document.createElement("p");
         chooseThemePrompt.textContent = "Please choose a theme from the options below:";
         welcomeContainer.appendChild(welcomeText);
-        welcomeContainer.appendChild(chooseThemePrompt);}
+        welcomeContainer.appendChild(chooseThemePrompt);
+        const traditionalTheme = document.createElement("button");
+        traditionalTheme.textContent = "Traditional Game";
+        const magicalTheme = document.createElement("button");
+        const dinosaurTheme = document.createElement("button");
+    
+    
+    }
 
     })
     
