@@ -1,3 +1,20 @@
+    const submitPlayerNameButton = document.querySelector("#submitPlayerNameButton");
+    const inputPlayerName = document.querySelector("#inputPlayerName");
+    const welcomeContainer = document.querySelector(".welcomeContainer");
+    submitPlayerNameButton.addEventListener("click",()=>{
+        event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
+        const welcomeText = document.createElement("p");
+        welcomeText.textContent = `Welcome, ${inputPlayerName.value}!`;
+        const chooseThemePrompt = document.createElement("p");
+        chooseThemePrompt.textContent = "Please choose a theme from the options below:";
+        welcomeContainer.appendChild(welcomeText);
+        welcomeContainer.appendChild(chooseThemePrompt);
+
+    })
+    
+    
+    
+    
     //4. DEFINE VARIABLES FOR THE TWO PLAYERS' SCORES (IN GLOBAL SCOPE) AND SET INITIAL VALUES TO 0. 
     let humanScore = 0;//has to be declared before the round or there's nothing to increment. 
     let computerScore = 0; //has to be declared before the round or there's nothing to increment. 

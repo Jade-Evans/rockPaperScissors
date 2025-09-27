@@ -1,5 +1,5 @@
 *{margin: 0px;
-display: border-box;
+ box-sizing: border-box;
 }
 body{
     background-color: rgb(118, 24, 127);
@@ -16,9 +16,16 @@ body{
     align-items: center;
     text-align: center;
     padding: 20px;
-    margin: 20px;
-    
-    
+    margin: 20px;    
+}
+.enterName{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    gap: 10px;
+}
+.nameENTER{
+    width: fit-content;
 }
 .choiceButtonContainer{
     display: flex;
@@ -27,7 +34,8 @@ body{
     margin: 20px;
 }
 .choiceButton{
-    background-color: lightblue;
+    background-color: rgb(210, 163, 246);
     padding: 8px;
     border-radius: 8px;
+    font-size: 20px;
 }
