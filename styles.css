@@ -28,11 +28,12 @@ body{
     width: fit-content;
 }
 .choiceButtonContainer{
-    display: flex;
+    display:none;}
+    /* display: flex; - ADD LATER WHEN THESE BUTTONS ARE REVEALED to JS
     justify-content: center;
     gap: 30px;
     margin: 20px;
-}
+} */
 .choiceButton{
     background-color: rgb(210, 163, 246);
     padding: 8px;
