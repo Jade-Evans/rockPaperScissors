@@ -4,15 +4,16 @@
     const enterNameForm = document.querySelector("#enterNameForm");
     const submitPlayerNameButton = document.querySelector("#submitPlayerNameButton");
     const inputPlayerName = document.querySelector("#inputPlayerName");
-    const welcomeContainer = document.querySelector(".welcomeContainer");
+    const welcomeChooseThemeContainer = document.querySelector(".welcomeChooseThemeContainer");
     const errorMessage = document.createElement("p");
     errorMessage.textContent = "Error: please enter name to continue";
     errorMessage.style.color = "red";
-    submitPlayerNameButton.addEventListener("click",()=>{
+    const themeButton = document.querySelector(".themeButtonList");
+    submitPlayerNameButton.addEventListener("click",(event)=>{
         event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
         if(!inputPlayerName.value){
             
-            welcomeContainer.appendChild(errorMessage);
+            welcomeChooseThemeContainer.appendChild(errorMessage);
         }
         else{
         readyHeader.remove();
@@ -24,24 +25,27 @@
         welcomeText.style.fontSize = "32px";
         const chooseThemePrompt = document.createElement("p");
         chooseThemePrompt.textContent = "Please choose a theme from the options below:";
-        welcomeContainer.appendChild(welcomeText);
-        welcomeContainer.appendChild(chooseThemePrompt);
+        welcomeChooseThemeContainer.appendChild(welcomeText);
+        welcomeChooseThemeContainer.appendChild(chooseThemePrompt);
         const traditionalTheme = document.createElement("button");
-        traditionalTheme.textContent = "🗿📄✂️Traditional";
-        welcomeContainer.appendChild(traditionalTheme);
         const magicalTheme = document.createElement("button");
         const dinosaurTheme = document.createElement("button");
         const heroTheme = document.createElement("button");
-        heroTheme.textContent = "🟩 🕷️ 🤖Marvel Universe";
-        welcomeContainer.appendChild(heroTheme);
+        traditionalTheme.textContent = "🗿📄✂️Traditional";
         magicalTheme.textContent = "🦄🧚🧜‍♀️Magic Kingdom";
-        welcomeContainer.appendChild(magicalTheme);
         dinosaurTheme.textContent = "🦕⛰️Dinosaur Mountain";
-        welcomeContainer.appendChild(dinosaurTheme);
+        heroTheme.textContent = "🟩 🕷️ 🤖Marvel Universe"; 
         traditionalTheme.classList.add("themeButton");
-        dinosaurTheme.classList.add("themeButton");
         magicalTheme.classList.add("themeButton");
+        dinosaurTheme.classList.add("themeButton");
         heroTheme.classList.add("themeButton");
+        welcomeChooseThemeContainer.appendChild(traditionalTheme);
+        welcomeChooseThemeContainer.appendChild(magicalTheme);
+        welcomeChooseThemeContainer.appendChild(dinosaurTheme);
+        welcomeChooseThemeContainer.appendChild(heroTheme);
+       
+       
+    
     }
 
     })
