@@ -1,4 +1,5 @@
-    
+    const contentContainer = document.querySelector("#contentContainer");
+    const mainTitle = document.querySelector(".mainTitle");
     const readyHeader = document.querySelector("#readyHeader");
     const gameIcon = document.querySelector("#gameIcon");
     const enterNameForm = document.querySelector("#enterNameForm");
@@ -16,39 +17,51 @@
             welcomeChooseThemeContainer.appendChild(errorMessage);
         }
         else{
-        readyHeader.remove();
-        enterNameForm.remove();
-        errorMessage.remove();
-        gameIcon.style.width = "80px";
-        const welcomeText = document.createElement("p");
-        welcomeText.textContent = `Welcome, ✨🌸${inputPlayerName.value}✨🌸!`;
-        welcomeText.style.fontSize = "32px";
-        const chooseThemePrompt = document.createElement("p");
-        chooseThemePrompt.textContent = "Please choose a theme from the options below:";
-        welcomeChooseThemeContainer.appendChild(welcomeText);
-        welcomeChooseThemeContainer.appendChild(chooseThemePrompt);
-        const traditionalTheme = document.createElement("button");
-        const magicalTheme = document.createElement("button");
-        const dinosaurTheme = document.createElement("button");
-        const heroTheme = document.createElement("button");
-        traditionalTheme.textContent = "🗿📄✂️Traditional";
-        magicalTheme.textContent = "🦄🧚🧜‍♀️Magic Kingdom";
-        dinosaurTheme.textContent = "🦕⛰️Dinosaur Mountain";
-        heroTheme.textContent = "🟩 🕷️ 🤖Marvel Universe"; 
-        traditionalTheme.classList.add("themeButton");
-        magicalTheme.classList.add("themeButton");
-        dinosaurTheme.classList.add("themeButton");
-        heroTheme.classList.add("themeButton");
-        welcomeChooseThemeContainer.appendChild(traditionalTheme);
-        welcomeChooseThemeContainer.appendChild(magicalTheme);
-        welcomeChooseThemeContainer.appendChild(dinosaurTheme);
-        welcomeChooseThemeContainer.appendChild(heroTheme);
-       
-       
+            readyHeader.remove();
+            enterNameForm.remove();
+            errorMessage.remove();
+            gameIcon.style.width = "80px";
+            const welcomeText = document.createElement("p");
+            welcomeText.textContent = `Welcome, ✨🌸${inputPlayerName.value}✨🌸!`;
+            welcomeText.style.fontSize = "32px";
+            const chooseThemePrompt = document.createElement("p");
+            chooseThemePrompt.textContent = "Please choose a theme from the options below:";
+            welcomeChooseThemeContainer.appendChild(welcomeText);
+            welcomeChooseThemeContainer.appendChild(chooseThemePrompt);
+            const traditionalTheme = document.createElement("button");
+            const magicalTheme = document.createElement("button");
+            const dinosaurTheme = document.createElement("button");
+            const heroTheme = document.createElement("button");
+            traditionalTheme.textContent = "🗿📄✂️Traditional";
+            magicalTheme.textContent = "🦄🧚🧜‍♀️Magic Kingdom";
+            dinosaurTheme.textContent = "🦕⛰️Dinosaur Mountain";
+            heroTheme.textContent = "🟩 🕷️ 🤖Marvel Universe"; 
+            traditionalTheme.classList.add("themeButton");
+            magicalTheme.classList.add("themeButton");
+            dinosaurTheme.classList.add("themeButton");
+            heroTheme.classList.add("themeButton");
+            welcomeChooseThemeContainer.appendChild(traditionalTheme);
+            welcomeChooseThemeContainer.appendChild(magicalTheme);
+            welcomeChooseThemeContainer.appendChild(dinosaurTheme);
+            welcomeChooseThemeContainer.appendChild(heroTheme);
+            //WHAT HAPPENS WHEN A THEME IS SELECTED//
+            //ADD CLICK EVENT LISTENER TO ALL THEMBBUTTONS//
+            const allThemeButtons = document.querySelectorAll(".themeButton");
+            allThemeButtons.forEach((button)=>{
+                button.addEventListener("click", ()=>{
+                    welcomeChooseThemeContainer.remove();
+                    if(button.textContent.includes("Dinosaur")){
+                        contentContainer.style.backgroundColor = "green";
+                        mainTitle.textContent = "DINOSAUR MOUNTAIN";
+                    }
+                });    
+            })
+        };
+        
+    });
     
-    }
-
-    })
+        
+  
     
     
     
