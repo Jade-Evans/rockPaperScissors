@@ -1,6 +1,7 @@
     const contentContainer = document.querySelector("#contentContainer");
+    const firstContainer = document.querySelector("#firstContainer");
     const mainTitle = document.querySelector(".mainTitle");
-    const readyHeader = document.querySelector("#readyHeader");
+    const welcomeToHeader = document.querySelector("#welcomeToHeader");
     const gameIcon = document.querySelector("#gameIcon");
     const enterNameForm = document.querySelector("#enterNameForm");
     const submitPlayerNameButton = document.querySelector("#submitPlayerNameButton");
@@ -17,30 +18,31 @@
             welcomeChooseThemeContainer.appendChild(errorMessage);
         }
         else{
-            readyHeader.remove();
-            enterNameForm.remove();
-            errorMessage.remove();
-            gameIcon.style.width = "80px";
+            firstContainer.innerHTML="";
             const welcomeText = document.createElement("p");
-            welcomeText.textContent = `Welcome, ✨🌸${inputPlayerName.value}✨🌸!`;
-            welcomeText.style.fontSize = "32px";
+            welcomeText.textContent = `✨🌸Hi, ${inputPlayerName.value}!✨🌸`;
+            welcomeText.style.fontSize = "38px";
             const chooseThemePrompt = document.createElement("p");
             chooseThemePrompt.textContent = "Please choose a theme from the options below:";
             welcomeChooseThemeContainer.appendChild(welcomeText);
             welcomeChooseThemeContainer.appendChild(chooseThemePrompt);
-            const traditionalTheme = document.createElement("button");
-            const magicalTheme = document.createElement("button");
-            const dinosaurTheme = document.createElement("button");
-            const heroTheme = document.createElement("button");
-            traditionalTheme.textContent = "🗿📄✂️Traditional";
-            magicalTheme.textContent = "🦄🧚🧜‍♀️Magic Kingdom";
-            dinosaurTheme.textContent = "🦕⛰️Dinosaur Mountain";
-            heroTheme.textContent = "🟩 🕷️ 🤖Marvel Universe"; 
-            traditionalTheme.classList.add("themeButton");
+            const classicTheme = document.createElement("img");
+            const magicalTheme = document.createElement("img");
+            const dinosaurTheme = document.createElement("img");
+            const heroTheme = document.createElement("img");
+            classicTheme.src = "imgs/classicIcon.png";
+            magicalTheme.src = "imgs/magicIcon.png";
+            dinosaurTheme.src = "imgs/dinoIcon.png";
+            heroTheme.src = "imgs/heroIcon.png"; 
+            classicTheme.alt="classic";
+            magicalTheme.alt="magic";
+            dinosaurTheme.alt = "dino";
+            heroTheme.alt="hero";
+            classicTheme.classList.add("themeButton");
             magicalTheme.classList.add("themeButton");
             dinosaurTheme.classList.add("themeButton");
             heroTheme.classList.add("themeButton");
-            welcomeChooseThemeContainer.appendChild(traditionalTheme);
+            welcomeChooseThemeContainer.appendChild(classicTheme);
             welcomeChooseThemeContainer.appendChild(magicalTheme);
             welcomeChooseThemeContainer.appendChild(dinosaurTheme);
             welcomeChooseThemeContainer.appendChild(heroTheme);
@@ -49,10 +51,26 @@
             const allThemeButtons = document.querySelectorAll(".themeButton");
             allThemeButtons.forEach((button)=>{
                 button.addEventListener("click", ()=>{
-                    welcomeChooseThemeContainer.remove();
-                    if(button.textContent.includes("Dinosaur")){
-                        contentContainer.style.backgroundColor = "green";
-                        mainTitle.textContent = "DINOSAUR MOUNTAIN";
+                    contentContainer.innerHTML = "";
+                   contentContainer.appendChild(welcomeToHeader);
+                    if(button.alt==="classic"){
+                        welcomeChooseThemeContainer.appendChild(classicTheme);
+                        contentContainer.style.backgroundColor = "blue"; 
+                    }
+                    else if(button.alt==="magic"){
+                        contentContainer.appendChild(magicalTheme);
+                        contentContainer.style.backgroundColor = "pink"; 
+                    }
+                    else if(button.alt==="dino"){
+                        contentContainer.appendChild(dinosaurTheme);
+                        contentContainer.style.backgroundColor = "green";   
+                       
+                    }
+                    else if(button.alt==="hero"){
+                        contentContainer.appendChild(heroTheme);
+                        heroTheme.style.width = "120px";
+                        heroTheme.style.height = "120px";
+                        contentContainer.style.backgroundColor = "red";  
                     }
                 });    
             })

@@ -9,7 +9,7 @@ body{
 }
 #contentContainer{
     background-color: pink;
-    border: 2px solid white;
+    border: 6px solid white;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
@@ -17,7 +17,13 @@ body{
     text-align: center;
     padding: 15px;
     margin: 20px;    
-    gap:15px;
+    gap:5px;
+}
+#enterNameBeforeBegin{
+    margin: 10px;
+}
+span{
+    font-weight: 400;
 }
 #gameIcon{
     max-width: 150px;
@@ -48,6 +54,9 @@ body{
     font-size: 18px;
     margin: 10px;
     border: 2px white solid;
+    width: 80px;
+    height: 80px;
+
 }
 .themeButton:hover {
     background-color: rgb(150, 116, 176);

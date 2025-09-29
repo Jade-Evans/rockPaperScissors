@@ -8,16 +8,17 @@
 </head>
 <body>
     <div id="contentContainer">
-        <h2 id="readyHeader">Ready to play...</h2>
-        <h1 class="mainTitle">ROCK, PAPER, SCISSORS!</h1>
-        <img src="rockPaperScissorsIcon.png" id="gameIcon">
-        <form id="enterNameForm">
-            <p>Before we begin, please enter your player name and press ENTER:</p>
-            <label for="playerName"></label>
-            <input type="text" id="inputPlayerName" name="playerName" minlength="2"
-            maxlength="12">
-            <input type="submit" value="ENTER" id="submitPlayerNameButton"/>
-        </form>
+        <div id="firstContainer">
+            <h2 id="welcomeToHeader">LET'S PLAY!</h2>
+            <img src="imgs/classicIcon.png" id="gameIcon">
+            <form id="enterNameForm">
+                <p id="enterNameBeforeBegin">Before we begin, please enter your player name and press <span><strong>"ENTER"</strong></span>:</p>
+                <label for="playerName"></label>
+                <input type="text" id="inputPlayerName" name="playerName" minlength="2"
+                maxlength="12">
+                <input type="submit" value="ENTER" id="submitPlayerNameButton"/>
+            </form>
+        </div>
         <div class="welcomeChooseThemeContainer"></div>
         <div class="choiceButtonContainer">
             <button class="choiceButton" id="rockButton">🗿Rock</button>
