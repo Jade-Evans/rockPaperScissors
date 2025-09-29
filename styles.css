@@ -49,3 +49,8 @@ body{
     margin: 10px;
     border: 2px white solid;
 }
+.themeButton:hover {
+    background-color: rgb(150, 116, 176);
+    color:white;
+    box-shadow:  5px 5px 0px rgb(150, 116, 176, 0.3);
+}
