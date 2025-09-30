@@ -53,8 +53,9 @@
                 button.addEventListener("click", ()=>{
                     contentContainer.innerHTML = "";
                    contentContainer.appendChild(welcomeToHeader);
+                  
                     if(button.alt==="classic"){
-                        welcomeChooseThemeContainer.appendChild(classicTheme);
+                        contentContainer.appendChild(classicTheme);
                         contentContainer.style.backgroundColor = "blue"; 
                     }
                     else if(button.alt==="magic"){
@@ -68,11 +69,18 @@
                     }
                     else if(button.alt==="hero"){
                         contentContainer.appendChild(heroTheme);
-                        heroTheme.style.width = "120px";
-                        heroTheme.style.height = "120px";
+                        
                         contentContainer.style.backgroundColor = "red";  
                     }
-                });    
+                    button.style.width = "150px";
+                    button.style.height = "150px";
+                    contentContainer.style.gap= "0px";
+                    welcomeToHeader.style.fontSize = "16px";
+                    const clickToBegin = document.createElement("p");
+                    contentContainer.appendChild(clickToBegin);
+                    clickToBegin.textContent = "(click the button above to start your adventure 👆✨)";
+                }); 
+                    
             })
         };
         
