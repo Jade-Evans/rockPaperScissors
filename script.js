@@ -59,7 +59,7 @@
                     clonedThemeButton.alt=button.alt;
                     clonedThemeButton.style.width = "150px";
                     clonedThemeButton.style.height = "150px";
-                    console.log(`The alt for ${button} is ${button.alt}`);
+                    console.log(`The alt for ${clonedThemeButton} is ${button.alt}`);
                     if(button.alt==="classic"){
                         contentContainer.style.backgroundColor = "blue";
                         }
@@ -78,40 +78,23 @@
                     contentContainer.appendChild(clickToBegin);
                     contentContainer.style.gap= "0px";
                     welcomeToHeader.style.fontSize = "16px";
-                     clonedThemeButton.addEventListener("click",()=>{
-                        const instructionsTitle = document.createElement("h2");
-                        const instructions = document.createElement("p"); 
-                        const choiceOptionsContainer = document.createElement("div");
-                        choiceOptionsContainer.classList.add("choiceOptionsContainer");
-                        
-                        const choice1 = document.createElement("img");
-                        const choice2 = document.createElement("img");
-                        const choice3 = document.createElement("img");
-                    
+                    clonedThemeButton.addEventListener("click",()=>{
                         if(clonedThemeButton.alt==="classic"){
-                            instructionsTitle.textContent="Classic Instructions";
-                            instructions.textContent="classic instructions here";
-                            choice1.src="imgs/rock.png";
-                            choice1.alt="rock";
-                            choice2.src="imgs/paper.png";
-                            choice2.alt="paper";
-                            choice3.src="imgs/scissors.png"; 
-                            choice3.alt="scissors";   
-                        };
-                        contentContainer.appendChild(instructionsTitle);
-                        contentContainer.appendChild(instructions);
-                        choiceOptionsContainer.appendChild(choice1);
-                        choiceOptionsContainer.appendChild(choice2);
-                        choiceOptionsContainer.appendChild(choice3);
-                        contentContainer.appendChild(choiceOptionsContainer);
-                    
+                            console.log("clone theme alt is classic");
+                            const classicPlay = document.querySelector("#classicPlay");
+                            classicPlay.style.display="block";
+                            }
+                            // else if(clonedThemeButton.alt==="magic"){
+                            //     const magicPlay = document.querySelector("#magicPlay");
+                            //     contentContainer.appendChild(magicPlay);}
+                            // else if(clonedThemeButton.alt==="dino"){
+                            //     const dinoPlay = document.querySelector("#dinoPlay");
+                            //     contentContainer.appendChild(dinoPlay);}
+                            // else if(clonedThemeButton.alt==="hero"){
+                            //     const heroPlay = document.querySelector("#heroPlay");
+                            //     contentContainer.appendChild(heroPlay);}
                     });
                 });  
-                    
-                   
-                  
-                    
-                    
             }); 
     }});               
             
@@ -123,119 +106,119 @@
     
     
     
-    //4. DEFINE VARIABLES FOR THE TWO PLAYERS' SCORES (IN GLOBAL SCOPE) AND SET INITIAL VALUES TO 0. 
-    let humanScore = 0;//has to be declared before the round or there's nothing to increment. 
-    let computerScore = 0; //has to be declared before the round or there's nothing to increment. 
-    // const humanChoice = getHumanAnswer();
-    let header2Information = document.querySelector("h2");
-    const resultsAnnouncement = document.querySelector("#resultsAnnouncement");
-    const playRound = function(humanChoice, computerChoice) {
-        header2Information.textContent = "The results are in!";
-        let playerFinalChoices = document.createElement("p");
-        playerFinalChoices.textContent = `Human: ${humanChoice},PC: ${computerChoice}`;
-        let result = document.createElement("p");
-        if(humanChoice === computerChoice){
+//     //4. DEFINE VARIABLES FOR THE TWO PLAYERS' SCORES (IN GLOBAL SCOPE) AND SET INITIAL VALUES TO 0. 
+//     let humanScore = 0;//has to be declared before the round or there's nothing to increment. 
+//     let computerScore = 0; //has to be declared before the round or there's nothing to increment. 
+//     // const humanChoice = getHumanAnswer();
+//     let header2Information = document.querySelector("h2");
+//     const resultsAnnouncement = document.querySelector("#resultsAnnouncement");
+//     const playRound = function(humanChoice, computerChoice) {
+//         header2Information.textContent = "The results are in!";
+//         let playerFinalChoices = document.createElement("p");
+//         playerFinalChoices.textContent = `Human: ${humanChoice},PC: ${computerChoice}`;
+//         let result = document.createElement("p");
+//         if(humanChoice === computerChoice){
             
-            result.textContent = `It's a draw: both players chose ${humanChoice}`;
+//             result.textContent = `It's a draw: both players chose ${humanChoice}`;
             
-            }
-        else if(humanChoice=="rock" && computerChoice == "scissors" || 
-                humanChoice == "paper" && computerChoice == "rock" || 
-                humanChoice == "scissors" && computerChoice == "paper")
-                {
-                result.textContent = `Human choice is ${humanChoice} & PC choice is ${computerChoice}: Human wins`;
-                 humanScore +=1;
-                }
-        else{result.textContent = `Human choice is ${humanChoice} & PC choice is ${computerChoice}: PC wins`;
-            computerScore +=1;
-            }
-        resultsAnnouncement.appendChild(result);
-        let scoreSummary = document.createElement("p");
-        scoreSummary.textContent = `The scores a the end of this round: human score is ${humanScore}, pc score is ${computerScore}`;
-        resultsAnnouncement.appendChild(scoreSummary);    
-        let playAgain = document.createElement("button");
-        playAgain.textContent = "Play Again";
-        let exit = document.createElement("button");
-        exit.textContent = "Exit";
-        resultsAnnouncement.appendChild(playAgain); 
-        resultsAnnouncement.appendChild(exit); 
-    };  
+//             }
+//         else if(humanChoice=="rock" && computerChoice == "scissors" || 
+//                 humanChoice == "paper" && computerChoice == "rock" || 
+//                 humanChoice == "scissors" && computerChoice == "paper")
+//                 {
+//                 result.textContent = `Human choice is ${humanChoice} & PC choice is ${computerChoice}: Human wins`;
+//                  humanScore +=1;
+//                 }
+//         else{result.textContent = `Human choice is ${humanChoice} & PC choice is ${computerChoice}: PC wins`;
+//             computerScore +=1;
+//             }
+//         resultsAnnouncement.appendChild(result);
+//         let scoreSummary = document.createElement("p");
+//         scoreSummary.textContent = `The scores a the end of this round: human score is ${humanScore}, pc score is ${computerScore}`;
+//         resultsAnnouncement.appendChild(scoreSummary);    
+//         let playAgain = document.createElement("button");
+//         playAgain.textContent = "Play Again";
+//         let exit = document.createElement("button");
+//         exit.textContent = "Exit";
+//         resultsAnnouncement.appendChild(playAgain); 
+//         resultsAnnouncement.appendChild(exit); 
+//     };  
 
 
 
 
-const getComputerAnswer = function(){
-    let num = Math.ceil(Math.random()*3);
-    let computerAnswer;
-    switch(num){
-    case 1: 
-        computerAnswer = "rock";
-        break;
-    case 2:
-        computerAnswer = "paper"; 
-        break; 
-    case 3:
-        computerAnswer = "scissors";
-        break;
-    default:
-        computerAnswer = "unknown";
-    }
-    return computerAnswer;
-};
+// const getComputerAnswer = function(){
+//     let num = Math.ceil(Math.random()*3);
+//     let computerAnswer;
+//     switch(num){
+//     case 1: 
+//         computerAnswer = "rock";
+//         break;
+//     case 2:
+//         computerAnswer = "paper"; 
+//         break; 
+//     case 3:
+//         computerAnswer = "scissors";
+//         break;
+//     default:
+//         computerAnswer = "unknown";
+//     }
+//     return computerAnswer;
+// };
 
-let humanChoice = "";
-const choiceButton = document.querySelectorAll(".choiceButton");
-const rockButton = document.querySelector("#rockButton");
-const paperButton = document.querySelector("#paperButton");
-const scissorsButton = document.querySelector("#scissorsButton");
-const announceSelections = document.querySelector("#announceSelections");
+// let humanChoice = "";
+// const choiceButton = document.querySelectorAll(".choiceButton");
+// const rockButton = document.querySelector("#rockButton");
+// const paperButton = document.querySelector("#paperButton");
+// const scissorsButton = document.querySelector("#scissorsButton");
+// const announceSelections = document.querySelector("#announceSelections");
 
-function humanChoiceFunction(button, choice){
+// function humanChoiceFunction(button, choice){
 
-button.addEventListener("click", ()=>{
-    announceSelections.innerHTML = "";
-    button.style.backgroundColor = "blue";
-    const para = document.createElement("p");
-    para.textContent = "";
-    para.textContent = `You chose: ${choice} - Are you happy with this choice?`;
-    announceSelections.appendChild(para);
-   const yesButton = document.createElement("button");
-    const noButton = document.createElement("button");
-    yesButton.textContent = "👍Yes";
-    noButton.textContent = "👎No";
-    announceSelections.appendChild(para);
-    announceSelections.appendChild(yesButton);
-    announceSelections.appendChild(noButton);
-    yesButton.addEventListener("click",()=>{
-    let confirmSelection = document.createElement("p");
-    confirmSelection.textContent = `Great! Your final choice is ${choice} - Press the button when you're ready to go!`;
-    announceSelections.appendChild(confirmSelection);
-    para.textContent = "";
-    yesButton.remove();
-    noButton.remove();
-    let playButton = document.createElement("button");
-    playButton.textContent = "Play round";
-    announceSelections.appendChild(playButton);
-    humanChoice = choice;
-    playButton.addEventListener("click",()=>{
-        playButton.remove();
-        choiceButton.forEach(button => button.style.display="none");
-        confirmSelection.remove();
-        playRound(humanChoice,getComputerAnswer());
+// button.addEventListener("click", ()=>{
+//     announceSelections.innerHTML = "";
+//     button.style.backgroundColor = "blue";
+//     const para = document.createElement("p");
+//     para.textContent = "";
+//     para.textContent = `You chose: ${choice} - Are you happy with this choice?`;
+//     announceSelections.appendChild(para);
+//    const yesButton = document.createElement("button");
+//     const noButton = document.createElement("button");
+//     yesButton.textContent = "👍Yes";
+//     noButton.textContent = "👎No";
+//     announceSelections.appendChild(para);
+//     announceSelections.appendChild(yesButton);
+//     announceSelections.appendChild(noButton);
+//     yesButton.addEventListener("click",()=>{
+//     let confirmSelection = document.createElement("p");
+//     confirmSelection.textContent = `Great! Your final choice is ${choice} - Press the button when you're ready to go!`;
+//     announceSelections.appendChild(confirmSelection);
+//     para.textContent = "";
+//     yesButton.remove();
+//     noButton.remove();
+//     let playButton = document.createElement("button");
+//     playButton.textContent = "Play round";
+//     announceSelections.appendChild(playButton);
+//     humanChoice = choice;
+//     playButton.addEventListener("click",()=>{
+//         playButton.remove();
+//         choiceButton.forEach(button => button.style.display="none");
+//         confirmSelection.remove();
+//         playRound(humanChoice,getComputerAnswer());
 
-    })
-    ;
-    });
-    noButton.addEventListener("click",()=>{
-        button.style.backgroundColor = "";
-        para.textContent = "Ok, please pick again";
-        yesButton.remove();
-        noButton.remove();
+//     })
+//     ;
+//     });
+//     noButton.addEventListener("click",()=>{
+//         button.style.backgroundColor = "";
+//         para.textContent = "Ok, please pick again";
+//         yesButton.remove();
+//         noButton.remove();
 
-    } )
+//     } )
 
-})};
-humanChoiceFunction(rockButton, "rock");
-humanChoiceFunction(paperButton, "paper");
-humanChoiceFunction(scissorsButton, "scissors");
+// })};
+// humanChoiceFunction(rockButton, "rock");
+// humanChoiceFunction(paperButton, "paper");
+// humanChoiceFunction(scissorsButton, "scissors");
 
