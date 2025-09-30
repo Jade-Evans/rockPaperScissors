@@ -50,6 +50,7 @@ OPTIONAL:
 
 LEARNING LOG:
 - preventDefault() to stop the submit automatically refreshing the page and removing the welcome message instantly. 
+- cloneNode(true) - creates a full clone of an element including any children without interfering with the original element. Used with my enlarged game theme buttons. 
 
 🦕 Real Dinosaur Trio
 - Triceratops — the horned herbivore with a protective frill. Great for a “defender” archetype.

@@ -50,41 +50,72 @@
             //ADD CLICK EVENT LISTENER TO ALL THEMBBUTTONS//
             const allThemeButtons = document.querySelectorAll(".themeButton");
             allThemeButtons.forEach((button)=>{
+                //this EL is what happens when a theme is chosen initially from 4 theme options//
+                //aka contentContainer goes to the clone button and the prompt message//
                 button.addEventListener("click", ()=>{
                     contentContainer.innerHTML = "";
-                   contentContainer.appendChild(welcomeToHeader);
-                  
+                    contentContainer.appendChild(welcomeToHeader);
+                    const clonedThemeButton = button.cloneNode(true);
+                    clonedThemeButton.alt=button.alt;
+                    clonedThemeButton.style.width = "150px";
+                    clonedThemeButton.style.height = "150px";
+                    console.log(`The alt for ${button} is ${button.alt}`);
                     if(button.alt==="classic"){
-                        contentContainer.appendChild(classicTheme);
-                        contentContainer.style.backgroundColor = "blue"; 
-                    }
-                    else if(button.alt==="magic"){
-                        contentContainer.appendChild(magicalTheme);
-                        contentContainer.style.backgroundColor = "pink"; 
-                    }
-                    else if(button.alt==="dino"){
-                        contentContainer.appendChild(dinosaurTheme);
-                        contentContainer.style.backgroundColor = "green";   
-                       
-                    }
-                    else if(button.alt==="hero"){
-                        contentContainer.appendChild(heroTheme);
-                        
-                        contentContainer.style.backgroundColor = "red";  
-                    }
-                    button.style.width = "150px";
-                    button.style.height = "150px";
+                        contentContainer.style.backgroundColor = "blue";
+                        }
+                        else if(button.alt==="magic"){
+                            contentContainer.style.backgroundColor = "pink"; 
+                        }
+                        else if(button.alt==="dino"){
+                            contentContainer.style.backgroundColor = "green";   
+                        }
+                        else if(button.alt==="hero"){
+                            contentContainer.style.backgroundColor = "red";  
+                        }
+                    contentContainer.appendChild(clonedThemeButton);
+                    const clickToBegin = document.createElement("p");
+                    clickToBegin.textContent = "(click the button above to start your adventure! 👆👆✨)";
+                    contentContainer.appendChild(clickToBegin);
                     contentContainer.style.gap= "0px";
                     welcomeToHeader.style.fontSize = "16px";
-                    const clickToBegin = document.createElement("p");
-                    contentContainer.appendChild(clickToBegin);
-                    clickToBegin.textContent = "(click the button above to start your adventure 👆✨)";
-                }); 
+                     clonedThemeButton.addEventListener("click",()=>{
+                        const instructionsTitle = document.createElement("h2");
+                        const instructions = document.createElement("p"); 
+                        const choiceOptionsContainer = document.createElement("div");
+                        choiceOptionsContainer.classList.add("choiceOptionsContainer");
+                        
+                        const choice1 = document.createElement("img");
+                        const choice2 = document.createElement("img");
+                        const choice3 = document.createElement("img");
                     
-            })
-        };
+                        if(clonedThemeButton.alt==="classic"){
+                            instructionsTitle.textContent="Classic Instructions";
+                            instructions.textContent="classic instructions here";
+                            choice1.src="imgs/rock.png";
+                            choice1.alt="rock";
+                            choice2.src="imgs/paper.png";
+                            choice2.alt="paper";
+                            choice3.src="imgs/scissors.png"; 
+                            choice3.alt="scissors";   
+                        };
+                        contentContainer.appendChild(instructionsTitle);
+                        contentContainer.appendChild(instructions);
+                        choiceOptionsContainer.appendChild(choice1);
+                        choiceOptionsContainer.appendChild(choice2);
+                        choiceOptionsContainer.appendChild(choice3);
+                        contentContainer.appendChild(choiceOptionsContainer);
+                    
+                    });
+                });  
+                    
+                   
+                  
+                    
+                    
+            }); 
+    }});               
+            
         
-    });
     
         
   
