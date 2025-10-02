@@ -2,14 +2,14 @@
  box-sizing: border-box;
 }
 body{
-    background-color: rgb(118, 24, 127);
+    background-color:rgb(237 146 95 / 66%);;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: lighter;
     color: white;
 }
 #contentContainer{
-    background-color: pink;
-    border: 6px solid white;
+    background-color:#cb3b18e0;
+    border: 5px double #ba2803;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@ span{
 }
 #gameIcon{
     max-width: 180px;
-    border: solid 3px pink;
+    border: solid 3px #ba2803;
     border-radius: 50%;
 }
 .enterName{
@@ -38,6 +38,7 @@ span{
 }
 .nameENTER{
     width: fit-content;
+    
 }
 .choiceButtonContainer{
     display:none;}
@@ -76,4 +77,8 @@ span{
     box-shadow: 5px 5px 0px rgba(0, 38, 77, 0.25);
     border-radius: 8px;
     margin: 10px;
+}
+
+#trexChoice{
+    background-color: slategrey;
 }

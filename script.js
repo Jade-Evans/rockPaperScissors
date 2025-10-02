@@ -9,7 +9,7 @@
     const welcomeChooseThemeContainer = document.querySelector(".welcomeChooseThemeContainer");
     const errorMessage = document.createElement("p");
     errorMessage.textContent = "Error: please enter name to continue";
-    errorMessage.style.color = "red";
+    errorMessage.style.color = "#630909";
     const themeButton = document.querySelector(".themeButtonList");
     submitPlayerNameButton.addEventListener("click",(event)=>{
         event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
