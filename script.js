@@ -23,7 +23,7 @@
             welcomeText.textContent = `✨🌸Hi, ${inputPlayerName.value}!✨🌸`;
             welcomeText.style.fontSize = "38px";
             const chooseThemePrompt = document.createElement("p");
-            chooseThemePrompt.textContent = "Please choose a theme from the options below:";
+            chooseThemePrompt.innerHTML = "Ready to get started? <br>Great! Please choose a theme from the options below:";
             welcomeChooseThemeContainer.appendChild(welcomeText);
             welcomeChooseThemeContainer.appendChild(chooseThemePrompt);
             const classicTheme = document.createElement("img");
@@ -81,24 +81,26 @@
                     welcomeToHeader.style.fontSize = "16px";
                     
                         clonedThemeButton.addEventListener("click",()=>{
+                            let themeSelection;
                             if(clonedThemeButton.alt==="classic"){
                                 console.log("clone theme alt is classic");
-                                const classicPlay = document.querySelector("#classicPlay");
+                                themeSelection = document.querySelector("#classicPlay");
                                 classicPlay.style.display="block";
                             }
                             else if(clonedThemeButton.alt==="magic"){
-                                    const magicPlay = document.querySelector("#magicPlay");
+                                    themeSelection = document.querySelector("#magicPlay");
                                     magicPlay.style.display="block";
                             }
                             else if(clonedThemeButton.alt==="dino"){
-                                    const dinoPlay = document.querySelector("#dinoPlay");
+                                    themeSelection= document.querySelector("#dinoPlay");
                                     dinoPlay.style.display="block";
                             }
                             else if(clonedThemeButton.alt==="hero"){
-                                    const heroPlay = document.querySelector("#heroPlay");
-                                    heroPlay.style.display="block";
+                                    themeSelection= document.querySelector("#heroPlay");
                             }
-                    });        
+                            themeSelection.style.display="block";
+                            contentContainer.appendChild(themeSelection);
+                        });        
                 });
             });  
         }; 

@@ -136,5 +136,10 @@ Always check the DOM nesting when elements aren’t behaving as expected. Even i
 
 Key Takeaway: DevTools is a lot easier to spot layout issues than looking on html/VSC.
 
+Bug: Struggling to append the playThemes to the contentContainer:
+This line is causing the crash:
+contentContainer.appendChild("themeSelection");
+You're trying to append the string "themeSelection" instead of the actual DOM node stored in the variable themeSelection.
+
 
 
