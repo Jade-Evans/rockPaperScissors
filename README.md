@@ -119,3 +119,22 @@ Throughout this project, I've become more confident in debugging independently �
 
 💪 Reflection
 I worked on this from 10am to 4pm and hit a real wall — but I kept going, asked the right questions, and finally cracked it. This was a huge confidence boost in understanding DOM structure, event timing, and dynamic element handling. I’m proud of how I stuck with it and documented the journey
+
+2nd October:
+🧠 Bug Summary: Dino and Hero Instructions Not Revealing
+Issue:
+The #dinoPlay and #heroPlay instruction blocks weren’t appearing when their cloned theme buttons were clicked.
+Root Cause:
+They were accidentally nested inside #magicPlay in the HTML. Since #magicPlay is hidden by default (display: none), any content inside it — including #dinoPlay and #heroPlay — was also hidden, even when display: block was applied to them.
+How I Diagnosed It:
+- Used DevTools to inspect the DOM structure after clicking the theme buttons.
+- Noticed that #dinoPlay and #heroPlay were children of #magicPlay, instead of being siblings like #classicPlay.
+Fix:
+Moved #dinoPlay and #heroPlay outside of #magicPlay in the HTML so they sit at the same level as the other .playTheme sections.
+Lesson Learned:
+Always check the DOM nesting when elements aren’t behaving as expected. Even if display: block is applied, a hidden parent will keep its children hidden.
+
+Key Takeaway: DevTools is a lot easier to spot layout issues than looking on html/VSC.
+
+
+

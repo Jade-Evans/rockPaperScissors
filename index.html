@@ -20,104 +20,105 @@
             </form>
         </div>
         <div class="welcomeChooseThemeContainer"></div>
-    </div>    
-    <div id="classicPlay">
-        <h2>Classic Clash Instructions</h2>
-        <ul>
-            <li>Choose one of the three options: <strong>Rock</strong>, <strong>Paper</strong>, or <strong>Scissors</strong></li>
-            <li>Press <strong>Submit</strong> to lock in your choice</li>
-            <li>Your opponent will randomly choose from the same three options</li>
-            <li>The rules are:
-                <ul>
-                <li><strong>Rock</strong> smashes <strong>Scissors</strong></li>
-                <li><strong>Scissors</strong> cut <strong>Paper</strong></li>
-                <li><strong>Paper</strong> covers <strong>Rock</strong></li>
-                </ul>
-            </li>
-            <li>Each game consists of <strong>3 rounds</strong></li>
-            <li>After 3 rounds, the player with the <strong>most points wins</strong></li>
-        </ul>
-        <p>Make your choice:</p>
-        <div class="choiceOptionsContainer">
-            <img src="imgs/rock.png" id="rockChoice" alt="rock">;
-            <img src="imgs/paper.png" id="paperChoice" alt="paper">;
-            <img src="imgs/scissors.png" id="scissorsChoice" alt="scissors">;
-        </div>
+    </div>      
+        <div id="classicPlay" class="playTheme">
+            <h2>Classic Clash Instructions</h2>
+            <ul>
+                <li>Choose one of the three options: <strong>Rock</strong>, <strong>Paper</strong>, or <strong>Scissors</strong></li>
+                <li>Press <strong>Submit</strong> to lock in your choice</li>
+                <li>Your opponent will randomly choose from the same three options</li>
+                <li>The rules are:
+                    <ul>
+                    <li><strong>Rock</strong> smashes <strong>Scissors</strong></li>
+                    <li><strong>Scissors</strong> cut <strong>Paper</strong></li>
+                    <li><strong>Paper</strong> covers <strong>Rock</strong></li>
+                    </ul>
+                </li>
+                <li>Each game consists of <strong>3 rounds</strong></li>
+                <li>After 3 rounds, the player with the <strong>most points wins</strong></li>
+            </ul>
+            <p>Make your choice:</p>
+            <div class="choiceOptionsContainer">
+                <img src="imgs/rock.png" id="rockChoice" class="choice1" alt="rock">;
+                <img src="imgs/paper.png" id="paperChoice" class="choice2" alt="paper">;
+                <img src="imgs/scissors.png" id="scissorsChoice" class="choice3" alt="scissors">;
+            </div>
 
-    </div>
-    <div id="magicPlay" style="display: none">
-        <h2>Magic Mayhem Instructions</h2>
-        <ul>
-            <li>Choose one of the three spells: <strong>Wand</strong>, <strong>Potion</strong>, or <strong>Scroll</strong></li>
-            <li>Press <strong>Submit</strong> to cast your spell</li>
-            <li>Your opponent will randomly cast one of the same three spells</li>
-            <li>The rules are:
-            <ul>
-                <li><strong>Wand</strong> disrupts <strong>Scroll</strong></li>
-                <li><strong>Scroll</strong> absorbs <strong>Potion</strong></li>
-                <li><strong>Potion</strong> melts <strong>Wand</strong></li>
-            </ul>
-            </li>
-            <li>Each duel consists of <strong>3 rounds</strong></li>
-            <li>After 3 rounds, the wizard with the <strong>most points wins</strong></li>
-        </ul>
-        <p>Choose your spell:</p>
-        <div class="choiceOptionsContainer">
-            <img src="imgs/wand.png" id="wandChoice" alt="wand">
-            <img src="imgs/potion.png" id="potionChoice" alt="potion">
-            <img src="imgs/scroll.png" id="scrollChoice" alt="scroll">
-    </div>
-    <div id="dinoPlay" style="display: none">
-        <h2>Dino Duel Instructions</h2>
-        <ul>
-            <li>Choose one of the three dinosaurs: <strong>T-Rex</strong>, <strong>Triceratops</strong>, or <strong>Pterodactyl</strong></li>
-            <li>Press <strong>Submit</strong> to unleash your dino</li>
-            <li>Your opponent will randomly choose one of the same three dinosaurs</li>
-            <li>The rules are:
-            <ul>
-                <li><strong>T-Rex</strong> chomps <strong>Pterodactyl</strong></li>
-                <li><strong>Pterodactyl</strong> outmaneuvers <strong>Triceratops</strong></li>
-                <li><strong>Triceratops</strong> deflects <strong>T-Rex</strong></li>
-            </ul>
-            </li>
-            <li>Each match consists of <strong>3 rounds</strong></li>
-            <li>After 3 rounds, the dino with the <strong>most points wins</strong></li>
-        </ul>
-        <p>Choose your dinosaur:</p>
-        <div class="choiceOptionsContainer">
-            <img src="imgs/trex.png" id="trexChoice" alt="t-rex">
-            <img src="imgs/triceratops.png" id="triceratopsChoice" alt="triceratops">
-            <img src="imgs/pterodactyl.png" id="pterodactylChoice" alt="pterodactyl">
         </div>
-    </div>
+        <div id="magicPlay" class="playTheme">
+            <h2>Magic Mayhem Instructions</h2>
+            <ul>
+                <li>Choose one of the three spells: <strong>Wand</strong>, <strong>Potion</strong>, or <strong>Scroll</strong></li>
+                <li>Press <strong>Submit</strong> to cast your spell</li>
+                <li>Your opponent will randomly cast one of the same three spells</li>
+                <li>The rules are:
+                <ul>
+                    <li><strong>Wand</strong> disrupts <strong>Scroll</strong></li>
+                    <li><strong>Scroll</strong> absorbs <strong>Potion</strong></li>
+                    <li><strong>Potion</strong> melts <strong>Wand</strong></li>
+                </ul>
+                </li>
+                <li>Each duel consists of <strong>3 rounds</strong></li>
+                <li>After 3 rounds, the wizard with the <strong>most points wins</strong></li>
+            </ul>
+            <p>Choose your spell:</p>
+            <div class="choiceOptionsContainer">
+                <img src="imgs/wand.png" id="wandChoice" class="choice1" alt="wand">
+                <img src="imgs/potion.png" id="potionChoice" class="choice2"  alt="potion">
+                <img src="imgs/scroll.png" id="scrollChoice" class="choice3" alt="scroll">
+            </div>
+        </div>
+            <div id="dinoPlay" class="playTheme">
+                <h2>Dino Duel Instructions</h2>
+                <ul>
+                    <li>Choose one of the three dinosaurs: <strong>T-Rex</strong>, <strong>Triceratops</strong>, or <strong>Pterodactyl</strong></li>
+                    <li>Press <strong>Submit</strong> to unleash your dino</li>
+                    <li>Your opponent will randomly choose one of the same three dinosaurs</li>
+                    <li>The rules are:
+                    <ul>
+                        <li><strong>T-Rex</strong> chomps <strong>Pterodactyl</strong></li>
+                        <li><strong>Pterodactyl</strong> outmaneuvers <strong>Triceratops</strong></li>
+                        <li><strong>Triceratops</strong> deflects <strong>T-Rex</strong></li>
+                    </ul>
+                    </li>
+                    <li>Each match consists of <strong>3 rounds</strong></li>
+                    <li>After 3 rounds, the dino with the <strong>most points wins</strong></li>
+                </ul>
+                <p>Choose your dinosaur:</p>
+                <div class="choiceOptionsContainer">
+                    <img src="imgs/trex.png" id="trexChoice" class="choice1" alt="t-rex">
+                    <img src="imgs/triceratops.png" id="triceratopsChoice" class="choice2" alt="triceratops">
+                    <img src="imgs/pterodactyl.png" id="pterodactylChoice" class="choice3" alt="pterodactyl">
+                </div>
+            </div>
+                
+            <div id="heroPlay" class="playTheme">
+                <h2>Hero Havoc Instructions</h2>
+                <ul>
+                    <li>Choose one of the three powers: <strong>Shield</strong>, <strong>Laser</strong>, or <strong>Speed</strong></li>
+                    <li>Press <strong>Submit</strong> to activate your power</li>
+                    <li>Your opponent will randomly activate one of the same three powers</li>
+                    <li>The rules are:
+                    <ul>
+                        <li><strong>Shield</strong> blocks <strong>Laser</strong></li>
+                        <li><strong>Laser</strong> outruns <strong>Speed</strong></li>
+                        <li><strong>Speed</strong> dodges <strong>Shield</strong></li>
+                    </ul>
+                    </li>
+                    <li>Each battle consists of <strong>3 rounds</strong></li>
+                    <li>After 3 rounds, the hero with the <strong>most points wins</strong></li>
+                </ul>
+                <p>Choose your power:</p>
+                <div class="choiceOptionsContainer">
+                    <img src="imgs/shield.png" id="shieldChoice" class="choice1" alt="shield">
+                    <img src="imgs/laser.png" id="laserChoice" class="choice2" alt="laser">
+                    <img src="imgs/speed.png" id="speedChoice" class="choice3" alt="speed">
+                </div>
+            </div> 
         
-    <div id="heroPlay" style="display: none">
-        <h2>Hero Havoc Instructions</h2>
-        <ul>
-            <li>Choose one of the three powers: <strong>Shield</strong>, <strong>Laser</strong>, or <strong>Speed</strong></li>
-            <li>Press <strong>Submit</strong> to activate your power</li>
-            <li>Your opponent will randomly activate one of the same three powers</li>
-            <li>The rules are:
-            <ul>
-                <li><strong>Shield</strong> blocks <strong>Laser</strong></li>
-                <li><strong>Laser</strong> outruns <strong>Speed</strong></li>
-                <li><strong>Speed</strong> dodges <strong>Shield</strong></li>
-            </ul>
-            </li>
-            <li>Each battle consists of <strong>3 rounds</strong></li>
-            <li>After 3 rounds, the hero with the <strong>most points wins</strong></li>
-        </ul>
-        <p>Choose your power:</p>
-        <div class="choiceOptionsContainer">
-            <img src="imgs/shield.png" id="shieldChoice" alt="shield">
-            <img src="imgs/laser.png" id="laserChoice" alt="laser">
-            <img src="imgs/speed.png" id="speedChoice" alt="speed">
-        </div>
-    </div> 
-            
         <div id="announceSelections"></div>
         <div id="resultsAnnouncement"></div>
-    </div>
+    
 
     
     
