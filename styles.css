@@ -70,6 +70,9 @@ span{
 .playTheme{
     display:none;
 }
+.instructions{
+    text-align: left;
+}
 .choiceOptionsContainer img{
     height:80px;
     width:80px;

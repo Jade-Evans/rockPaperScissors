@@ -142,4 +142,8 @@ contentContainer.appendChild("themeSelection");
 You're trying to append the string "themeSelection" instead of the actual DOM node stored in the variable themeSelection.
 
 
-
+Small Mistakes = big problems
+When appending be sure to make sure you have the parent and child the right way around; I missed this when trying to append a submit button to contentContainer and instead tried to append my entire content to a submit button, causing the whole content to disappear!:
+contentContainer.appendChild(submitIconChoice);
+NOT
+submitIconChoice.appendChild(contentContainer);

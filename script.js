@@ -100,6 +100,15 @@
                             }
                             themeSelection.style.display="block";
                             contentContainer.appendChild(themeSelection);
+                            clonedThemeButton.style.width="80px";
+                            clonedThemeButton.style.height="80px";
+                            clickToBegin.remove();
+                            const submitIconChoice = document.createElement("input");
+                            submitIconChoice.type = "submit";
+                            submitIconChoice.value = "SUBMIT"; // Optional label
+                            submitIconChoice.classList.add = "submitIconChoice";
+                            contentContainer.appendChild(submitIconChoice);
+
                         });        
                 });
             });  
