@@ -74,29 +74,31 @@
                         }
                     contentContainer.appendChild(clonedThemeButton);
                     const clickToBegin = document.createElement("p");
-                    clickToBegin.textContent = "(click the button above to start your adventure! 👆👆✨)";
+                    clickToBegin.textContent = "(Click the button above to start your adventure! 👆👆✨)";
+                    clickToBegin.style.fontSize="16px";
                     contentContainer.appendChild(clickToBegin);
                     contentContainer.style.gap= "0px";
                     welcomeToHeader.style.fontSize = "16px";
-                    clonedThemeButton.addEventListener("click",()=>{
-                        if(clonedThemeButton.alt==="classic"){
-                            console.log("clone theme alt is classic");
-                            const classicPlay = document.querySelector("#classicPlay");
-                            classicPlay.style.display="block";
-                            }
-                            // else if(clonedThemeButton.alt==="magic"){
-                            //     const magicPlay = document.querySelector("#magicPlay");
-                            //     contentContainer.appendChild(magicPlay);}
-                            // else if(clonedThemeButton.alt==="dino"){
-                            //     const dinoPlay = document.querySelector("#dinoPlay");
-                            //     contentContainer.appendChild(dinoPlay);}
-                            // else if(clonedThemeButton.alt==="hero"){
-                            //     const heroPlay = document.querySelector("#heroPlay");
-                            //     contentContainer.appendChild(heroPlay);}
-                    });
-                });  
-            }); 
-    }});               
+                    
+                        clonedThemeButton.addEventListener("click",()=>{
+                            if(clonedThemeButton.alt==="classic"){
+                                console.log("clone theme alt is classic");
+                                const classicPlay = document.querySelector("#classicPlay");
+                                classicPlay.style.display="block";
+                                }
+                                else if(clonedThemeButton.alt==="magic"){
+                                    const magicPlay = document.querySelector("#magicPlay");
+                                    magicPlay.style.display="block";}
+                                else if(clonedThemeButton.alt==="dino"){
+                                    const dinoPlay = document.querySelector("#dinoPlay");
+                                    dinoPlay.style.display="block";}
+                                else if(clonedThemeButton.alt==="hero"){
+                                    heroPlay.style.display="block";
+                        }});        
+                });
+            });  
+        }; 
+    });              
             
         
     

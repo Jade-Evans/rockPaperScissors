@@ -75,6 +75,7 @@ Loop logic:
   _→ explore cleaner patterns using arrays, mapping, or reusable functions_
 - Update colour palettes for improved aesthetic harmony and accessibility
 - Add magical animations (e.g. glow, sparkle, bounce) to enhance interactivity
+- Include avatars for the player and computer and allow player to select themselves and their opponent
 - Include option for players to randomly generate their avatar instead of choosing manually
 - Allow players to select number of rounds before starting the game
 - Add a back button to let players change their theme or avatar choice
@@ -104,3 +105,17 @@ Loop logic:
 ## 🧠 Learning Process
 
 Throughout this project, I've become more confident in debugging independently — relying less on AI assistance and more on reading console errors and tracing issues myself. I’ve noticed that many bugs stem from scope issues or undefined variables, and I’m learning to spot these patterns more quickly. This has helped me build trust in my own problem-solving process and deepen my understanding of how JavaScript behaves in different contexts.
+
+## SPECIFIC DEBUGGING EXAMPLES ##
+- hich was accidentally deleting the instruction blocks that lived inside it
+- Fix: Moved instruction blocks outside #contentContainer so they wouldn’t be wiped
+- Bonus fix: Attached the click listener to clonedThemeButton immediately after creating it, instead of inside a DOMContentLoaded block (which only runs once)
+
+✨ What I Learned
+- innerHTML = "" clears everything inside a container — including elements I might want to keep
+- DOMContentLoaded is only useful for static elements present at page load — not for dynamically created ones
+- Always check whether an element is being removed before trying to access it
+- Debugging without errors requires careful DOM inspection and console logging
+
+💪 Reflection
+I worked on this from 10am to 4pm and hit a real wall — but I kept going, asked the right questions, and finally cracked it. This was a huge confidence boost in understanding DOM structure, event timing, and dynamic element handling. I’m proud of how I stuck with it and documented the journey
