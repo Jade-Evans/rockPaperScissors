@@ -11,6 +11,7 @@
     errorMessage.textContent = "Error: please enter name to continue";
     errorMessage.style.color = "#630909";
     const themeButton = document.querySelector(".themeButtonList");
+    let submitIconChoice;
     submitPlayerNameButton.addEventListener("click",(event)=>{
         event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
         if(!inputPlayerName.value){
@@ -79,8 +80,19 @@
                     contentContainer.appendChild(clickToBegin);
                     contentContainer.style.gap= "0px";
                     welcomeToHeader.style.fontSize = "16px";
+                    welcomeToHeader.style.marginTop ="20px";
                     
                         clonedThemeButton.addEventListener("click",()=>{
+                            const backButton = document.createElement("button");
+                            backButton.textContent = "Return to Theme Options";
+                            backButton.classList.add("returnToThemeButton");
+                            contentContainer.insertBefore(backButton, contentContainer.firstChild);
+                            submitIconChoice = document.createElement("input");
+                            submitIconChoice.type = "submit";
+                            submitIconChoice.value = "SUBMIT"; // Optional label
+                            submitIconChoice.classList.add("submitIconChoice");
+                            submitIconChoice.disabled=true;//only enables submit later after an icon is chosen. 
+                            
                             let themeSelection;
                             if(clonedThemeButton.alt==="classic"){
                                 console.log("clone theme alt is classic");
@@ -103,18 +115,43 @@
                             clonedThemeButton.style.width="80px";
                             clonedThemeButton.style.height="80px";
                             clickToBegin.remove();
-                            const submitIconChoice = document.createElement("input");
-                            submitIconChoice.type = "submit";
-                            submitIconChoice.value = "SUBMIT"; // Optional label
-                            submitIconChoice.classList.add = "submitIconChoice";
-                            contentContainer.appendChild(submitIconChoice);
+                            welcomeToHeader.remove();
 
-                        });        
-                });
-            });  
-        }; 
-    });              
-            
+                            
+                            contentContainer.appendChild(submitIconChoice);
+                        });    
+                            
+                        let humanChoice = null;
+                        
+                        const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
+                        possibleChoices.forEach((choice)=>{
+                            choice.addEventListener("click", ()=>{
+                                humanChoice = choice.id;
+                                console.log(humanChoice);
+                                submitIconChoice.disabled=false;
+                                submitIconChoice.style.border="5px solid black";
+                            });
+                        });
+                            submitIconChoice.addEventListener("click",()=>{
+                                if(!humanChoice){
+                                    const warning = document.createElement("p");
+                                    warning.textContent="warning";
+                                    contentContainer.appendChild(warning);
+                                    }
+                                else{
+                                    contentContainer.innerHTML="";
+                                }
+                            });        
+                        });         
+                                
+                })
+
+        }       
+    });        
+   
+// const choice1 = document.querySelector(".choice1");
+//                                     const choice2 = document.querySelector(".choice2");
+//                                     const choice3 = document.querySelector(".choice3");
         
     
         

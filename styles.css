@@ -18,6 +18,7 @@ body{
     padding: 15px;
     margin: 20px;    
     gap:5px;
+    position: relative;
 }
 #enterNameBeforeBegin{
     margin: 10px;
@@ -66,6 +67,13 @@ span{
     border: 2px gold solid;
     box-shadow: 0 0 10px gold;
     font-size: 19px;
+}
+.returnToThemeButton{
+    position:absolute;
+    top: 5px;
+    left: 5px;
+   
+
 }
 .playTheme{
     display:none;
