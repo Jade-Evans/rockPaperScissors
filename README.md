@@ -147,3 +147,11 @@ When appending be sure to make sure you have the parent and child the right way 
 contentContainer.appendChild(submitIconChoice);
 NOT
 submitIconChoice.appendChild(contentContainer);
+
+6th October:
+🧭 Theme Selection Flow (Return to Theme Option Button)
+- Users can choose a theme and return to the selection screen if they want to choose a different theme.
+- Re-selecting the same theme works in most cases, but may not fully reset all elements.
+- I chose to focus on completing the core game logic and left this area partially implemented for now.
+- Future improvements could include resetting state more cleanly and adding animations for smoother transitions.
+

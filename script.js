@@ -1,32 +1,25 @@
     const contentContainer = document.querySelector("#contentContainer");
-    const firstContainer = document.querySelector("#firstContainer");
     const mainTitle = document.querySelector(".mainTitle");
     const welcomeToHeader = document.querySelector("#welcomeToHeader");
     const gameIcon = document.querySelector("#gameIcon");
     const enterNameForm = document.querySelector("#enterNameForm");
     const submitPlayerNameButton = document.querySelector("#submitPlayerNameButton");
     const inputPlayerName = document.querySelector("#inputPlayerName");
-    const welcomeChooseThemeContainer = document.querySelector(".welcomeChooseThemeContainer");
     const errorMessage = document.createElement("p");
     errorMessage.textContent = "Error: please enter name to continue";
     errorMessage.style.color = "#630909";
     const themeButton = document.querySelector(".themeButtonList");
+    const playTheme = document.querySelectorAll("#playTheme");
     let submitIconChoice;
-    submitPlayerNameButton.addEventListener("click",(event)=>{
-        event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
-        if(!inputPlayerName.value){
-            
-            welcomeChooseThemeContainer.appendChild(errorMessage);
-        }
-        else{
-            firstContainer.innerHTML="";
+    const chooseAThemePage = function(){
+        contentContainer.innerHTML="";
             const welcomeText = document.createElement("p");
             welcomeText.textContent = `✨🌸Hi, ${inputPlayerName.value}!✨🌸`;
             welcomeText.style.fontSize = "38px";
             const chooseThemePrompt = document.createElement("p");
             chooseThemePrompt.innerHTML = "Ready to get started? <br>Great! Please choose a theme from the options below:";
-            welcomeChooseThemeContainer.appendChild(welcomeText);
-            welcomeChooseThemeContainer.appendChild(chooseThemePrompt);
+            contentContainer.appendChild(welcomeText);
+            contentContainer.appendChild(chooseThemePrompt);
             const classicTheme = document.createElement("img");
             const magicalTheme = document.createElement("img");
             const dinosaurTheme = document.createElement("img");
@@ -43,18 +36,22 @@
             magicalTheme.classList.add("themeButton");
             dinosaurTheme.classList.add("themeButton");
             heroTheme.classList.add("themeButton");
-            welcomeChooseThemeContainer.appendChild(classicTheme);
-            welcomeChooseThemeContainer.appendChild(magicalTheme);
-            welcomeChooseThemeContainer.appendChild(dinosaurTheme);
-            welcomeChooseThemeContainer.appendChild(heroTheme);
-            //WHAT HAPPENS WHEN A THEME IS SELECTED//
-            //ADD CLICK EVENT LISTENER TO ALL THEMBBUTTONS//
+            contentContainer.appendChild(classicTheme);
+            contentContainer.appendChild(magicalTheme);
+            contentContainer.appendChild(dinosaurTheme);
+            contentContainer.appendChild(heroTheme);
             const allThemeButtons = document.querySelectorAll(".themeButton");
             allThemeButtons.forEach((button)=>{
                 //this EL is what happens when a theme is chosen initially from 4 theme options//
                 //aka contentContainer goes to the clone button and the prompt message//
                 button.addEventListener("click", ()=>{
                     contentContainer.innerHTML = "";
+                    const backButton = document.createElement("button");
+                    backButton.textContent = "Return to Theme Options";
+                    backButton.classList.add("returnToThemeButton");
+                    backButton.addEventListener("click",()=>{chooseAThemePage()});
+                    contentContainer.insertBefore(backButton, contentContainer.firstChild);
+                    submitIconChoice = document.createElement("input");
                     contentContainer.appendChild(welcomeToHeader);
                     const clonedThemeButton = button.cloneNode(true);
                     clonedThemeButton.alt=button.alt;
@@ -83,33 +80,34 @@
                     welcomeToHeader.style.marginTop ="20px";
                     
                         clonedThemeButton.addEventListener("click",()=>{
-                            const backButton = document.createElement("button");
-                            backButton.textContent = "Return to Theme Options";
-                            backButton.classList.add("returnToThemeButton");
-                            contentContainer.insertBefore(backButton, contentContainer.firstChild);
-                            submitIconChoice = document.createElement("input");
+                            
                             submitIconChoice.type = "submit";
                             submitIconChoice.value = "SUBMIT"; // Optional label
                             submitIconChoice.classList.add("submitIconChoice");
                             submitIconChoice.disabled=true;//only enables submit later after an icon is chosen. 
-                            
+                            submitIconChoice.addEventListener("click",()=>{
+                                console.log("submit button clicked");
+                                contentContainer.innerHTML="";
+                            }
+                        ); 
                             let themeSelection;
                             if(clonedThemeButton.alt==="classic"){
                                 console.log("clone theme alt is classic");
                                 themeSelection = document.querySelector("#classicPlay");
-                                classicPlay.style.display="block";
                             }
                             else if(clonedThemeButton.alt==="magic"){
                                     themeSelection = document.querySelector("#magicPlay");
-                                    magicPlay.style.display="block";
                             }
                             else if(clonedThemeButton.alt==="dino"){
                                     themeSelection= document.querySelector("#dinoPlay");
-                                    dinoPlay.style.display="block";
                             }
                             else if(clonedThemeButton.alt==="hero"){
                                     themeSelection= document.querySelector("#heroPlay");
                             }
+                            document.querySelectorAll(".playTheme").forEach(container => {
+                                container.style.display = "none";
+                            });
+
                             themeSelection.style.display="block";
                             contentContainer.appendChild(themeSelection);
                             clonedThemeButton.style.width="80px";
@@ -121,33 +119,34 @@
                             contentContainer.appendChild(submitIconChoice);
                         });    
                             
-                        let humanChoice = null;
+                            let humanChoice = null;
                         
-                        const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
-                        possibleChoices.forEach((choice)=>{
-                            choice.addEventListener("click", ()=>{
-                                humanChoice = choice.id;
-                                console.log(humanChoice);
-                                submitIconChoice.disabled=false;
-                                submitIconChoice.style.border="5px solid black";
+                            const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
+                            possibleChoices.forEach((choice)=>{
+                                choice.addEventListener("click", ()=>{
+                                    humanChoice = choice.id;
+                                    console.log(humanChoice);
+                                    submitIconChoice.disabled=false;
+                                    submitIconChoice.style.border="5px solid black";
+                                });
                             });
-                        });
-                            submitIconChoice.addEventListener("click",()=>{
-                                if(!humanChoice){
-                                    const warning = document.createElement("p");
-                                    warning.textContent="warning";
-                                    contentContainer.appendChild(warning);
-                                    }
-                                else{
-                                    contentContainer.innerHTML="";
-                                }
-                            });        
-                        });         
-                                
-                })
-
-        }       
-    });        
+                               
+                    });       
+                                 
+            })                  
+    } 
+    submitPlayerNameButton.addEventListener("click",(event)=>{
+            event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
+        if(!inputPlayerName.value){
+        contentContainer.appendChild(errorMessage);
+        }
+        else{
+            contentContainer.innerHTML="";
+            chooseAThemePage();
+        }
+    });                          
+              
+      
    
 // const choice1 = document.querySelector(".choice1");
 //                                     const choice2 = document.querySelector(".choice2");
