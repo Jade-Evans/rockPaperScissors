@@ -155,14 +155,18 @@ submitIconChoice.appendChild(contentContainer);
 - I chose to focus on completing the core game logic and left this area partially implemented for now.
 - Future improvements could include resetting state more cleanly and adding animations for smoother transitions.
 
-8th October:
-Observation: Since most of the logic and content is handled in JavaScript, it makes sense to structure different "pages" as reusable functions within the content container. This approach makes it easier to implement "back" buttons and navigate between views dynamically.
-8th October:
-Observation: I’m beginning to understand a more structured approach to layout. My workflow now includes:
-- Defining global variables (e.g., querySelectors, scores).
-- Creating reusable functions to represent different “pages” or logic blocks.
-- Calling those functions to drive the game flow and user interactions.
-This structure makes it easier to manage dynamic views, implement back buttons, and keep the code maintainable.
+🧠 Learning Observation — 8th October
+I’m beginning to use variable interpolation to streamline my code and reduce repetition. For example, instead of writing multiple if statements to select a theme container,like:
+else if(currentTheme==="magic"){
+                            themeSelection = document.querySelector("#magicPlay");
+                    }
+                    else if(currentTheme==="dino"){
+                            themeSelection= document.querySelector("#dinoPlay");
+                    }
+  now use:
+themeSelection = document.querySelector(`#${currentTheme}Play`);
+
+This approach dynamically builds the selector string using the value of currentTheme, making the code more scalable and easier to maintain. 
 
 
 

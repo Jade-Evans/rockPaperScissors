@@ -9,25 +9,18 @@
     errorMessage.textContent = "Error: please enter name to continue";
     errorMessage.style.color = "#630909";
     const themeButton = document.querySelector(".themeButtonList");
-    const playTheme = document.querySelectorAll("#playTheme");
+    const playTheme = document.querySelectorAll(".playTheme");
+    const resultsAnnouncement = document.querySelector("#resultsAnnouncement");
     let playerName;
+    let currentTheme=null;
     let submitIconChoice;
     let humanChoice = null;
     let humanChoiceImage = null;
+    const getComputerChoice = document.createElement("button");
     
     let humanScore = 0;//has to be declared globally or there's nothing to increment each round. //
     let computerScore = 0; //as above //
-    submitPlayerNameButton.addEventListener("click",(event)=>{
-            event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
-        if(!inputPlayerName.value){
-        contentContainer.appendChild(errorMessage);
-        }
-        else{
-            playerName = inputPlayerName.value;
-            contentContainer.innerHTML="";
-            chooseAThemePage();
-        }
-    });  
+    
     const playerVsComputerPage = function(){
         contentContainer.innerHTML="";
         const playerVsComputerTitle=document.createElement("h2");
@@ -36,9 +29,10 @@
         const playerVsComputerInstruction = document.createElement("p"); 
         playerVsComputerInstruction.textContent="When you're ready, press the button below to get your opponent's choice and see who wins!"
         contentContainer.appendChild(playerVsComputerInstruction); 
-         const getComputerChoice = document.createElement("button");
-        getComputerChoice.textContent="Get Computer Choice";
         contentContainer.appendChild(getComputerChoice);
+        getComputerChoice.textContent="Get Computer Choice";
+        
+        
         const vsImageContainer = document.createElement("div");
         contentContainer.appendChild(vsImageContainer);
         vsImageContainer.classList.add("vsImageContainer");
@@ -52,26 +46,32 @@
         computerChoiceImage.src = "imgs/questionMark.png";
         vsImageContainer.appendChild(computerChoiceImage);
         computerChoiceImage.classList.add("computerChoiceImage");
-    }
+    };
     const getComputerAnswer = function(){
-    let num = Math.ceil(Math.random()*3);
-    let computerAnswer;
-    switch(num){
-    case 1: 
-        computerAnswer = "rock";
-        break;
-    case 2:
-        computerAnswer = "paper"; 
-        break; 
-    case 3:
-        computerAnswer = "scissors";
-        break;
-    default:
-        computerAnswer = "unknown";
-    }
-    return computerAnswer;
-};
-    const resultsAnnouncement = document.querySelector("#resultsAnnouncement");
+        let num = Math.ceil(Math.random()*3);
+        let computerAnswer;
+        switch(num){
+        case 1: 
+            computerAnswer = document.querySelector(`.${currentTheme}.choice1.id`);
+            console.log(`computerAnswer:${computerAnswer}`);
+            break;
+        case 2:
+            computerAnswer = document.querySelector(`.${currentTheme}.choice2.id`);
+            console.log(`computerAnswer:${computerAnswer}`);
+            break; 
+        case 3:
+        computerAnswer = document.querySelector(`.${currentTheme}.choice3.id`);
+            console.log(`computerAnswer:${computerAnswer}`);
+            break;
+        default:
+            computerAnswer = "unknown";
+        }
+        return computerAnswer;
+    };
+    getComputerChoice.addEventListener("click",()=>{
+        getComputerAnswer();
+    });
+    
     const playRound = function(humanChoice, computerChoice) {
         header2Information.textContent = "The results are in!";
         let playerFinalChoices = document.createElement("p");
@@ -170,64 +170,77 @@
                     contentContainer.style.gap= "0px";
                     welcomeToHeader.style.fontSize = "16px";
                     welcomeToHeader.style.marginTop ="20px";
-                   
+                    clonedThemeButton.addEventListener("click",()=>{
+                        submitIconChoice.type = "submit";
+                        submitIconChoice.value = "SUBMIT"; // Optional label
+                        submitIconChoice.classList.add("submitIconChoice");
+                        submitIconChoice.disabled=true;//only enables submit later after an icon is chosen. 
+                        submitIconChoice.addEventListener("click",()=>{
+                            console.log("submit button clicked");
+                            playerVsComputerPage();
+                        }
+                    ); 
+                    let themeSelection;
+                    currentTheme = clonedThemeButton.alt;
+                    themeSelection = document.querySelector(`#${currentTheme}Play`);
+                    if(currentTheme==="classic"){
+                        console.log("clone theme alt is classic");
+                        
+                    }
+                    else if(currentTheme==="magic"){
+                            themeSelection = document.querySelector("#magicPlay");
+                    }
+                    else if(currentTheme==="dino"){
+                            themeSelection= document.querySelector("#dinoPlay");
+                    }
+                    else if(currentTheme==="hero"){
+                            themeSelection= document.querySelector("#heroPlay");
+                    }
+
+                    playTheme.forEach(container =>{
+                        container.style.display = "none";
+                    });
+
+                    themeSelection.style.display="block";
+                    contentContainer.appendChild(themeSelection);
+                    clonedThemeButton.style.width="80px";
+                    clonedThemeButton.style.height="80px";
+                    clickToBegin.remove();
+                    welcomeToHeader.remove();
+
                     
-                        clonedThemeButton.addEventListener("click",()=>{
-                            
-                            submitIconChoice.type = "submit";
-                            submitIconChoice.value = "SUBMIT"; // Optional label
-                            submitIconChoice.classList.add("submitIconChoice");
-                            submitIconChoice.disabled=true;//only enables submit later after an icon is chosen. 
-                            submitIconChoice.addEventListener("click",()=>{
-                                console.log("submit button clicked");
-                                playerVsComputerPage();
-                            }
-                        ); 
-                            let themeSelection;
-                            if(clonedThemeButton.alt==="classic"){
-                                console.log("clone theme alt is classic");
-                                themeSelection = document.querySelector("#classicPlay");
-                            }
-                            else if(clonedThemeButton.alt==="magic"){
-                                    themeSelection = document.querySelector("#magicPlay");
-                            }
-                            else if(clonedThemeButton.alt==="dino"){
-                                    themeSelection= document.querySelector("#dinoPlay");
-                            }
-                            else if(clonedThemeButton.alt==="hero"){
-                                    themeSelection= document.querySelector("#heroPlay");
-                            }
-                            document.querySelectorAll(".playTheme").forEach(container => {
-                                container.style.display = "none";
-                            });
-
-                            themeSelection.style.display="block";
-                            contentContainer.appendChild(themeSelection);
-                            clonedThemeButton.style.width="80px";
-                            clonedThemeButton.style.height="80px";
-                            clickToBegin.remove();
-                            welcomeToHeader.remove();
-
-                            
-                            contentContainer.appendChild(submitIconChoice);
-                        });    
+                    contentContainer.appendChild(submitIconChoice);
+                });    
                            
                         
-                            const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
-                            possibleChoices.forEach((choice)=>{
-                                choice.addEventListener("click", ()=>{
-                                    humanChoice = choice.id;
-                                    humanChoiceImage = choice.cloneNode(true);
-                                    console.log(humanChoice);
-                                    submitIconChoice.disabled=false;
-                                    submitIconChoice.style.border="5px solid black";
-                                });
+                        const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
+                        possibleChoices.forEach((choice)=>{
+                            choice.addEventListener("click", ()=>{
+                                humanChoice = choice.id;
+                                humanChoiceImage = choice.cloneNode(true);
+                                console.log(humanChoice);
+                                submitIconChoice.disabled=false;
+                                submitIconChoice.style.border="5px solid black";
                             });
+                        });
                                
                     });       
                                  
-            })                  
-    } 
+            }) 
+    }
+    submitPlayerNameButton.addEventListener("click",(event)=>{
+            event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
+        if(!inputPlayerName.value){
+        contentContainer.appendChild(errorMessage);
+        }
+        else{
+            playerName = inputPlayerName.value;
+            contentContainer.innerHTML="";
+            chooseAThemePage();
+        }
+    });                    
+
+            
                             
               
         
