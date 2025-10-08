@@ -17,7 +17,8 @@
     let choiceSubmitButton;
     let humanChoice = null;
     let humanChoiceImage = null;
-    let PCChoiceImage;
+    let PCChoiceImage = document.createElement("img");
+    PCChoiceImage.classList.add("PCChoiceImage");
     const getPCChoiceButton = document.createElement("button");
     getPCChoiceButton.classList.add("getPCChoiceButton");
     
@@ -45,10 +46,9 @@
         vs.textContent="VS";
         vsImageContainer.appendChild(vs);
        
-        const PCChoiceImage = document.createElement("img");
         PCChoiceImage.src = "imgs/questionMark.png";
         vsImageContainer.appendChild(PCChoiceImage);
-        PCChoiceImage.classList.add("PCChoiceImage");
+        
     };
 
     const classicArray = ["rock", "paper","scissors"];
@@ -191,7 +191,7 @@ getPCChoiceButton.addEventListener("click",()=>{
     const announcePCSelection = document.createElement("p");
     announcePCSelection.textContent = `PC Chose ${PCChoice.toUpperCase()}`;
     contentContainer.appendChild(announcePCSelection);
-    PCChoiceImage = document.getElementById(PCChoice);
+    PCChoiceImage.src = `imgs/${PCChoice}.png`;
     getPCChoiceButton.disabled=true;
 
 });      
