@@ -34,7 +34,6 @@
         contentContainer.appendChild(getPCChoice);
         getPCChoice.textContent="Get PC Choice";
         
-        
         const vsImageContainer = document.createElement("div");
         contentContainer.appendChild(vsImageContainer);
         vsImageContainer.classList.add("vsImageContainer");
@@ -49,25 +48,34 @@
         vsImageContainer.appendChild(PCChoiceImage);
         PCChoiceImage.classList.add("PCChoiceImage");
     };
+
+    const classicArray = ["rock", "paper","scissors"];
+    const magicArray = ["wand","potion","crystal ball"];
+    const dinoArray = ["trex", "triceratops", "pterodactyl"];
+    const heroArray = ["strength", "smarts", "speed"];
+
     const getPCAnswer = function(){
-        let num = Math.ceil(Math.random()*3);
-        let PCAnswer;
-        switch(num){
-        case 1: 
-            PCAnswer = document.querySelector(`.${currentTheme}.choice1`);
-            console.log(`PCAnswer:${PCAnswer}`);
-            break;
-        case 2:
-            PCAnswer = document.querySelector(`.${currentTheme}.choice2`);
-            console.log(`PCAnswer:${PCAnswer}`);
-            break; 
-        case 3:
-        PCAnswer = document.querySelector(`.${currentTheme}.choice3`);
-            console.log(`PCAnswer:${PCAnswer}`);
-            break;
-        default:
-            PCAnswer = "unknown";
+        let themeChoiceOptions;
+        switch(currentTheme){
+            case "classic":
+                themeChoiceOptions = classicArray;
+                break;
+            case "magic":
+                themeChoiceOptions = magicArray;
+                break;
+            case "dino":
+                themeChoiceOptions = dinoArray;
+                break;
+            case "hero":
+                themeChoiceOptions = heroArray;
+                break;
+            default:
+                console.log("WARNING: No theme or unknown theme detected!")
+                return null;
         }
+        let randomIndex = Math.ceil(Math.random()*3);//or times themeChoiceOptions.length() if varying options in future//
+        let PCAnswer = themeChoiceOptions[randomIndex];
+        console.log("PCAnswer:", PCAnswer)
         return PCAnswer;
     };
     
@@ -154,8 +162,9 @@
                 });
                                                              
             });
-    })
-}
+        })
+    }
+
 submitPlayerNameButton.addEventListener("click",(event)=>{
         event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
     if(!inputPlayerName.value){
@@ -166,49 +175,52 @@ submitPlayerNameButton.addEventListener("click",(event)=>{
         contentContainer.innerHTML="";
         chooseAThemePage();
     }
-});      
+}); 
+
+
 getPCChoice.addEventListener("click",()=>{
+    console.log("Get computer choice button was clicked.")
     let PCChoice = getPCAnswer();
     if(!PCChoice){
         console.log("warning no PC answer generated")
     }
     const announcePCSelection = document.createElement("p");
-    announcePCSelection.textContent = "PC Chose...";
+    announcePCSelection.textContent = `PC Chose ${PCChoice.toUpperCase()}`;
     contentContainer.appendChild(announcePCSelection);
 
 });      
 
-const playRound = function(humanChoice, PCChoice) {
-        header2Information.textContent = "The results are in!";
-        let playerFinalChoices = document.createElement("p");
-        playerFinalChoices.textContent = `Human: ${humanChoice},PC: ${PCChoice}`;
-        let result = document.createElement("p");
-        if(humanChoice === PCChoice){
+// const playRound = function(humanChoice, PCChoice) {
+//         header2Information.textContent = "The results are in!";
+//         let playerFinalChoices = document.createElement("p");
+//         playerFinalChoices.textContent = `Human: ${humanChoice},PC: ${PCChoice}`;
+//         let result = document.createElement("p");
+//         if(humanChoice === PCChoice){
             
-            result.textContent = `It's a draw: both players chose ${humanChoice}`;
+//             result.textContent = `It's a draw: both players chose ${humanChoice}`;
             
-            }
-        else if(humanChoice=="rock" && PCChoice == "scissors" || 
-                humanChoice == "paper" && PCChoice == "rock" || 
-                humanChoice == "scissors" && PCChoice == "paper")
-                {
-                result.textContent = `Human choice is ${humanChoice} & PC choice is ${PCChoice}: Human wins`;
-                 humanScore +=1;
-                }
-        else{result.textContent = `Human choice is ${humanChoice} & PC choice is ${PCChoice}: PC wins`;
-            PCScore +=1;
-            }
-        resultsAnnouncement.appendChild(result);
-        let scoreSummary = document.createElement("p");
-        scoreSummary.textContent = `The scores a the end of this round: human score is ${humanScore}, pc score is ${PCScore}`;
-        resultsAnnouncement.appendChild(scoreSummary);    
-        let playAgain = document.createElement("button");
-        playAgain.textContent = "Play Again";
-        let exit = document.createElement("button");
-        exit.textContent = "Exit";
-        resultsAnnouncement.appendChild(playAgain); 
-        resultsAnnouncement.appendChild(exit); 
-    };  
+//             }
+//         else if(humanChoice=="rock" && PCChoice == "scissors" || 
+//                 humanChoice == "paper" && PCChoice == "rock" || 
+//                 humanChoice == "scissors" && PCChoice == "paper")
+//                 {
+//                 result.textContent = `Human choice is ${humanChoice} & PC choice is ${PCChoice}: Human wins`;
+//                  humanScore +=1;
+//                 }
+//         else{result.textContent = `Human choice is ${humanChoice} & PC choice is ${PCChoice}: PC wins`;
+//             PCScore +=1;
+//             }
+//         resultsAnnouncement.appendChild(result);
+//         let scoreSummary = document.createElement("p");
+//         scoreSummary.textContent = `The scores a the end of this round: human score is ${humanScore}, PC score is ${PCScore}`;
+//         resultsAnnouncement.appendChild(scoreSummary);    
+//         let playAgain = document.createElement("button");
+//         playAgain.textContent = "Play Again";
+//         let exit = document.createElement("button");
+//         exit.textContent = "Exit";
+//         resultsAnnouncement.appendChild(playAgain); 
+//         resultsAnnouncement.appendChild(exit); 
+//     };  
 
             
                             

@@ -170,5 +170,21 @@ This approach dynamically builds the selector string using the value of currentT
 
 🧠 Naming Reflection — 8th October
 I renamed chosenTheme to displayedTheme to better reflect its role in my game flow. This variable holds the DOM element for the currently visible theme instructions and choices. The name helps me distinguish it from currentTheme
+🧠 Learning Log: Refactoring getPCAnswer Logic
+I originally tried to reuse the .choice1, .choice2, .choice3 class-based elements from the DOM to generate the PC’s answer. My plan was to dynamically query them using:
+document.querySelector(`#${currentTheme}Play .choice${num}`);
+
+
+This worked in theory, but in practice I ran into DOM timing issues — the elements were often cleared or not present when I needed them. Debugging this became foggy and time-consuming, and I realized I was spending more energy untangling structure than progressing the game.
+So I made a pragmatic decision: I refactored my getPCAnswer() logic to use simple theme-based arrays instead. For example:
+const classicArray = ["rock", "paper", "scissors"];
+
+
+Then I used a random index to select a choice and retrieved the matching image by ID:
+const pcChoice = classicArray[randomIndex];
+const pcChoiceImage = document.getElementById(pcChoice);
+
+
+This approach is cleaner for my current level and avoids DOM dependency issues. I can always refactor later to reuse DOM nodes more elegantly — but for now, this keeps my logic readable, reliable, and fun to build on.
 
 
