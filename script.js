@@ -17,7 +17,9 @@
     let choiceSubmitButton;
     let humanChoice = null;
     let humanChoiceImage = null;
-    const getPCChoice = document.createElement("button");
+    let PCChoiceImage;
+    const getPCChoiceButton = document.createElement("button");
+    getPCChoiceButton.classList.add("getPCChoiceButton");
     
     let humanScore = 0;//has to be declared globally or there's nothing to increment each round. //
     let PCScore = 0; //as above //
@@ -31,8 +33,8 @@
         playerVsPCInstruction.textContent="When you're ready, press the button below to get your opponent's choice and see who wins!"
         playerVsPCInstruction.style.margin = "15px";
         contentContainer.appendChild(playerVsPCInstruction); 
-        contentContainer.appendChild(getPCChoice);
-        getPCChoice.textContent="Get PC Choice";
+        contentContainer.appendChild(getPCChoiceButton);
+        getPCChoiceButton.textContent="Get PC Choice";
         
         const vsImageContainer = document.createElement("div");
         contentContainer.appendChild(vsImageContainer);
@@ -73,7 +75,7 @@
                 console.log("WARNING: No theme or unknown theme detected!")
                 return null;
         }
-        let randomIndex = Math.ceil(Math.random()*3);//or times themeChoiceOptions.length() if varying options in future//
+        let randomIndex = Math.floor(Math.random()*themeChoiceOptions.length);//or times themeChoiceOptions.length() if varying options in future//
         let PCAnswer = themeChoiceOptions[randomIndex];
         console.log("PCAnswer:", PCAnswer)
         return PCAnswer;
@@ -134,8 +136,10 @@
                         choiceSubmitButton.addEventListener("click",()=>{
                             console.log("submit button clicked");
                             playerVsPCPage();
+                            console.log("button to generate PC choice was clicked");
                         }
                     ); 
+
                    
                     currentTheme = clonedThemeButton.alt;
                     let displayedTheme = document.querySelector(`#${currentTheme}Play`);
@@ -178,7 +182,7 @@ submitPlayerNameButton.addEventListener("click",(event)=>{
 }); 
 
 
-getPCChoice.addEventListener("click",()=>{
+getPCChoiceButton.addEventListener("click",()=>{
     console.log("Get computer choice button was clicked.")
     let PCChoice = getPCAnswer();
     if(!PCChoice){
@@ -187,6 +191,8 @@ getPCChoice.addEventListener("click",()=>{
     const announcePCSelection = document.createElement("p");
     announcePCSelection.textContent = `PC Chose ${PCChoice.toUpperCase()}`;
     contentContainer.appendChild(announcePCSelection);
+    PCChoiceImage = document.getElementById(PCChoice);
+    getPCChoiceButton.disabled=true;
 
 });      
 
