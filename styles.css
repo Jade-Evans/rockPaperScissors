@@ -84,7 +84,7 @@ span{
 .instructions{
     text-align: left;
 }
-.choiceOptionsContainer img, .humanChoiceImage, .computerChoiceImage{
+.choiceOptionsContainer img, .humanChoiceImage, .PCChoiceImage{
     height:80px;
     width:80px;
     border: 2px solid blue;
@@ -94,9 +94,16 @@ span{
 }
 .vsImageContainer{
     display:flex;
-    justify-content: space-between;
+    justify-content:space-between;
     align-items: center;
+    gap: 20px;
 }
-#trexChoice{
-    background-color: slategrey;
+.vsImageContainer img{
+    height:150px;
+    width:150px;
+    border: 2px solid blue;
+    box-shadow: 5px 5px 0px rgba(0, 38, 77, 0.25);
+    border-radius: 8px;
+    margin: 10px;
+
 }
