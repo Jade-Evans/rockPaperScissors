@@ -8,12 +8,12 @@
     const errorMessage = document.createElement("p");
     errorMessage.textContent = "Error: please enter name to continue";
     errorMessage.style.color = "#630909";
-    const themeButton = document.querySelector(".themeButtonList");
+    const themeOptionsContainer = document.querySelector("#themeOptionsContainer");
     const playTheme = document.querySelectorAll(".playTheme");
     const resultsAnnouncement = document.querySelector("#resultsAnnouncement");
     let playerName;
     let currentTheme=null;
-    let submitIconChoice;
+    let choiceSubmitButton;
     let humanChoice = null;
     let humanChoiceImage = null;
     const getComputerChoice = document.createElement("button");
@@ -112,30 +112,10 @@
             chooseThemePrompt.innerHTML = "Ready to get started? <br>Great! Please choose a theme from the options below:";
             contentContainer.appendChild(welcomeText);
             contentContainer.appendChild(chooseThemePrompt);
-            const classicTheme = document.createElement("img");
-            const magicalTheme = document.createElement("img");
-            const dinosaurTheme = document.createElement("img");
-            const heroTheme = document.createElement("img");
-            classicTheme.src = "imgs/classicIcon.png";
-            magicalTheme.src = "imgs/magicIcon.png";
-            dinosaurTheme.src = "imgs/dinoIcon.png";
-            heroTheme.src = "imgs/heroIcon.png"; 
-            classicTheme.alt="classic";
-            magicalTheme.alt="magic";
-            dinosaurTheme.alt = "dino";
-            heroTheme.alt="hero";
-            classicTheme.classList.add("themeButton");
-            magicalTheme.classList.add("themeButton");
-            dinosaurTheme.classList.add("themeButton");
-            heroTheme.classList.add("themeButton");
-            contentContainer.appendChild(classicTheme);
-            contentContainer.appendChild(magicalTheme);
-            contentContainer.appendChild(dinosaurTheme);
-            contentContainer.appendChild(heroTheme);
+            contentContainer.appendChild(themeOptionsContainer);
+            themeOptionsContainer.style.display="block";
             const allThemeButtons = document.querySelectorAll(".themeButton");
             allThemeButtons.forEach((button)=>{
-                //this EL is what happens when a theme is chosen initially from 4 theme options//
-                //aka contentContainer goes to the clone button and the prompt message//
                 button.addEventListener("click", ()=>{
                     contentContainer.innerHTML = "";
                     const backButton = document.createElement("button");
@@ -143,7 +123,7 @@
                     backButton.classList.add("returnToThemeButton");
                     backButton.addEventListener("click",()=>{chooseAThemePage()});
                     contentContainer.insertBefore(backButton, contentContainer.firstChild);
-                    submitIconChoice = document.createElement("input");
+                    choiceSubmitButton = document.createElement("input");
                     contentContainer.appendChild(welcomeToHeader);
                     const clonedThemeButton = button.cloneNode(true);
                     clonedThemeButton.alt=button.alt;
@@ -171,74 +151,53 @@
                     welcomeToHeader.style.fontSize = "16px";
                     welcomeToHeader.style.marginTop ="20px";
                     clonedThemeButton.addEventListener("click",()=>{
-                        submitIconChoice.type = "submit";
-                        submitIconChoice.value = "SUBMIT"; // Optional label
-                        submitIconChoice.classList.add("submitIconChoice");
-                        submitIconChoice.disabled=true;//only enables submit later after an icon is chosen. 
-                        submitIconChoice.addEventListener("click",()=>{
+                        choiceSubmitButton.type = "submit";
+                        choiceSubmitButton.value = "SUBMIT"; // Optional label
+                        choiceSubmitButton.classList.add("choiceSubmitButton");
+                        choiceSubmitButton.disabled=true;//only enables submit later after an icon is chosen. 
+                        choiceSubmitButton.addEventListener("click",()=>{
                             console.log("submit button clicked");
                             playerVsComputerPage();
                         }
                     ); 
-                    let themeSelection;
+                    let displayedTheme;
                     currentTheme = clonedThemeButton.alt;
-                    themeSelection = document.querySelector(`#${currentTheme}Play`);
-                    if(currentTheme==="classic"){
-                        console.log("clone theme alt is classic");
-                        
-                    }
-                    else if(currentTheme==="magic"){
-                            themeSelection = document.querySelector("#magicPlay");
-                    }
-                    else if(currentTheme==="dino"){
-                            themeSelection= document.querySelector("#dinoPlay");
-                    }
-                    else if(currentTheme==="hero"){
-                            themeSelection= document.querySelector("#heroPlay");
-                    }
-
+                    displayedTheme = document.querySelector(`#${currentTheme}Play`);
                     playTheme.forEach(container =>{
                         container.style.display = "none";
                     });
-
-                    themeSelection.style.display="block";
-                    contentContainer.appendChild(themeSelection);
+                    displayedTheme.style.display="block";
+                    contentContainer.appendChild(displayedTheme);
                     clonedThemeButton.style.width="80px";
                     clonedThemeButton.style.height="80px";
                     clickToBegin.remove();
                     welcomeToHeader.remove();
-
-                    
-                    contentContainer.appendChild(submitIconChoice);
+                    contentContainer.appendChild(choiceSubmitButton);
                 });    
-                           
-                        
-                        const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
-                        possibleChoices.forEach((choice)=>{
-                            choice.addEventListener("click", ()=>{
-                                humanChoice = choice.id;
-                                humanChoiceImage = choice.cloneNode(true);
-                                console.log(humanChoice);
-                                submitIconChoice.disabled=false;
-                                submitIconChoice.style.border="5px solid black";
-                            });
-                        });
-                               
-                    });       
-                                 
-            }) 
+                const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
+                possibleChoices.forEach((choice)=>{
+                    choice.addEventListener("click", ()=>{
+                        humanChoice = choice.id;
+                        humanChoiceImage = choice.cloneNode(true);
+                        console.log(humanChoice);
+                        choiceSubmitButton.disabled=false;
+                        choiceSubmitButton.style.border="5px solid black";
+                    });
+                });                                             
+            });
+    })
+}
+submitPlayerNameButton.addEventListener("click",(event)=>{
+        event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
+    if(!inputPlayerName.value){
+    contentContainer.appendChild(errorMessage);
     }
-    submitPlayerNameButton.addEventListener("click",(event)=>{
-            event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
-        if(!inputPlayerName.value){
-        contentContainer.appendChild(errorMessage);
-        }
-        else{
-            playerName = inputPlayerName.value;
-            contentContainer.innerHTML="";
-            chooseAThemePage();
-        }
-    });                    
+    else{
+        playerName = inputPlayerName.value;
+        contentContainer.innerHTML="";
+        chooseAThemePage();
+    }
+});                    
 
             
                             

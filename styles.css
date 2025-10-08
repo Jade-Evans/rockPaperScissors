@@ -48,6 +48,9 @@ span{
     gap: 30px;
     margin: 20px;
 } */
+#themeOptionsContainer{
+    display: none;
+}
 .themeButton, .choiceButton{
     background-color: #d2a3f6;
     color: purple;

@@ -168,5 +168,7 @@ themeSelection = document.querySelector(`#${currentTheme}Play`);
 
 This approach dynamically builds the selector string using the value of currentTheme, making the code more scalable and easier to maintain. 
 
+🧠 Naming Reflection — 8th October
+I renamed chosenTheme to displayedTheme to better reflect its role in my game flow. This variable holds the DOM element for the currently visible theme instructions and choices. The name helps me distinguish it from currentTheme
 
 
