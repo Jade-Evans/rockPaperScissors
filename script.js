@@ -30,17 +30,28 @@
     });  
     const playerVsComputerPage = function(){
         contentContainer.innerHTML="";
-        const readyToPlay=document.createElement("h2");
-        readyToPlay.textContent="READY TO PLAY?";
-        contentContainer.appendChild(readyToPlay); 
-        const playerChoiceAnnouncement = document.createElement("p"); 
-        playerChoiceAnnouncement.textContent=`${playerName}, You have chosen: ${humanChoice.toUpperCase()}!`;
-        contentContainer.appendChild(playerChoiceAnnouncement); 
+        const playerVsComputerTitle=document.createElement("h2");
+        playerVsComputerTitle.textContent=`${playerName}, You have chosen: ${humanChoice.toUpperCase()}!`;;
+        contentContainer.appendChild(playerVsComputerTitle); 
+        const playerVsComputerInstruction = document.createElement("p"); 
+        playerVsComputerInstruction.textContent="When you're ready, press the button below to get your opponent's choice and see who wins!"
+        contentContainer.appendChild(playerVsComputerInstruction); 
+         const getComputerChoice = document.createElement("button");
+        getComputerChoice.textContent="Get Computer Choice";
+        contentContainer.appendChild(getComputerChoice);
         const vsImageContainer = document.createElement("div");
         contentContainer.appendChild(vsImageContainer);
         vsImageContainer.classList.add("vsImageContainer");
         vsImageContainer.appendChild(humanChoiceImage);
         humanChoiceImage.classList.add("humanChoiceImage");
+        const vs = document.createElement("p");
+        vs.textContent="VS";
+        vsImageContainer.appendChild(vs);
+       
+        const computerChoiceImage = document.createElement("img");
+        computerChoiceImage.src = "imgs/questionMark.png";
+        vsImageContainer.appendChild(computerChoiceImage);
+        computerChoiceImage.classList.add("computerChoiceImage");
     }
     const getComputerAnswer = function(){
     let num = Math.ceil(Math.random()*3);

@@ -81,7 +81,7 @@ span{
 .instructions{
     text-align: left;
 }
-.choiceOptionsContainer img, .humanChoiceImage{
+.choiceOptionsContainer img, .humanChoiceImage, .computerChoiceImage{
     height:80px;
     width:80px;
     border: 2px solid blue;
@@ -89,8 +89,10 @@ span{
     border-radius: 8px;
     margin: 10px;
 }
-#vsImageContainer{
+.vsImageContainer{
     display:flex;
+    justify-content: space-between;
+    align-items: center;
 }
 #trexChoice{
     background-color: slategrey;
