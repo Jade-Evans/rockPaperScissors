@@ -10,11 +10,92 @@
     errorMessage.style.color = "#630909";
     const themeButton = document.querySelector(".themeButtonList");
     const playTheme = document.querySelectorAll("#playTheme");
+    let playerName;
     let submitIconChoice;
+    let humanChoice = null;
+    let humanChoiceImage = null;
+    
+    let humanScore = 0;//has to be declared globally or there's nothing to increment each round. //
+    let computerScore = 0; //as above //
+    submitPlayerNameButton.addEventListener("click",(event)=>{
+            event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
+        if(!inputPlayerName.value){
+        contentContainer.appendChild(errorMessage);
+        }
+        else{
+            playerName = inputPlayerName.value;
+            contentContainer.innerHTML="";
+            chooseAThemePage();
+        }
+    });  
+    const playerVsComputerPage = function(){
+        contentContainer.innerHTML="";
+        const readyToPlay=document.createElement("h2");
+        readyToPlay.textContent="READY TO PLAY?";
+        contentContainer.appendChild(readyToPlay); 
+        const playerChoiceAnnouncement = document.createElement("p"); 
+        playerChoiceAnnouncement.textContent=`${playerName}, You have chosen: ${humanChoice.toUpperCase()}!`;
+        contentContainer.appendChild(playerChoiceAnnouncement); 
+        const vsImageContainer = document.createElement("div");
+        contentContainer.appendChild(vsImageContainer);
+        vsImageContainer.classList.add("vsImageContainer");
+        vsImageContainer.appendChild(humanChoiceImage);
+        humanChoiceImage.classList.add("humanChoiceImage");
+    }
+    const getComputerAnswer = function(){
+    let num = Math.ceil(Math.random()*3);
+    let computerAnswer;
+    switch(num){
+    case 1: 
+        computerAnswer = "rock";
+        break;
+    case 2:
+        computerAnswer = "paper"; 
+        break; 
+    case 3:
+        computerAnswer = "scissors";
+        break;
+    default:
+        computerAnswer = "unknown";
+    }
+    return computerAnswer;
+};
+    const resultsAnnouncement = document.querySelector("#resultsAnnouncement");
+    const playRound = function(humanChoice, computerChoice) {
+        header2Information.textContent = "The results are in!";
+        let playerFinalChoices = document.createElement("p");
+        playerFinalChoices.textContent = `Human: ${humanChoice},PC: ${computerChoice}`;
+        let result = document.createElement("p");
+        if(humanChoice === computerChoice){
+            
+            result.textContent = `It's a draw: both players chose ${humanChoice}`;
+            
+            }
+        else if(humanChoice=="rock" && computerChoice == "scissors" || 
+                humanChoice == "paper" && computerChoice == "rock" || 
+                humanChoice == "scissors" && computerChoice == "paper")
+                {
+                result.textContent = `Human choice is ${humanChoice} & PC choice is ${computerChoice}: Human wins`;
+                 humanScore +=1;
+                }
+        else{result.textContent = `Human choice is ${humanChoice} & PC choice is ${computerChoice}: PC wins`;
+            computerScore +=1;
+            }
+        resultsAnnouncement.appendChild(result);
+        let scoreSummary = document.createElement("p");
+        scoreSummary.textContent = `The scores a the end of this round: human score is ${humanScore}, pc score is ${computerScore}`;
+        resultsAnnouncement.appendChild(scoreSummary);    
+        let playAgain = document.createElement("button");
+        playAgain.textContent = "Play Again";
+        let exit = document.createElement("button");
+        exit.textContent = "Exit";
+        resultsAnnouncement.appendChild(playAgain); 
+        resultsAnnouncement.appendChild(exit); 
+    };  
     const chooseAThemePage = function(){
         contentContainer.innerHTML="";
             const welcomeText = document.createElement("p");
-            welcomeText.textContent = `✨🌸Hi, ${inputPlayerName.value}!✨🌸`;
+            welcomeText.textContent = `✨🌸Hi, ${playerName}!✨🌸`;
             welcomeText.style.fontSize = "38px";
             const chooseThemePrompt = document.createElement("p");
             chooseThemePrompt.innerHTML = "Ready to get started? <br>Great! Please choose a theme from the options below:";
@@ -78,6 +159,7 @@
                     contentContainer.style.gap= "0px";
                     welcomeToHeader.style.fontSize = "16px";
                     welcomeToHeader.style.marginTop ="20px";
+                   
                     
                         clonedThemeButton.addEventListener("click",()=>{
                             
@@ -87,7 +169,7 @@
                             submitIconChoice.disabled=true;//only enables submit later after an icon is chosen. 
                             submitIconChoice.addEventListener("click",()=>{
                                 console.log("submit button clicked");
-                                contentContainer.innerHTML="";
+                                playerVsComputerPage();
                             }
                         ); 
                             let themeSelection;
@@ -118,13 +200,13 @@
                             
                             contentContainer.appendChild(submitIconChoice);
                         });    
-                            
-                            let humanChoice = null;
+                           
                         
                             const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
                             possibleChoices.forEach((choice)=>{
                                 choice.addEventListener("click", ()=>{
                                     humanChoice = choice.id;
+                                    humanChoiceImage = choice.cloneNode(true);
                                     console.log(humanChoice);
                                     submitIconChoice.disabled=false;
                                     submitIconChoice.style.border="5px solid black";
@@ -135,22 +217,8 @@
                                  
             })                  
     } 
-    submitPlayerNameButton.addEventListener("click",(event)=>{
-            event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
-        if(!inputPlayerName.value){
-        contentContainer.appendChild(errorMessage);
-        }
-        else{
-            contentContainer.innerHTML="";
-            chooseAThemePage();
-        }
-    });                          
+                            
               
-      
-   
-// const choice1 = document.querySelector(".choice1");
-//                                     const choice2 = document.querySelector(".choice2");
-//                                     const choice3 = document.querySelector(".choice3");
         
     
         
@@ -160,64 +228,15 @@
     
     
 //     //4. DEFINE VARIABLES FOR THE TWO PLAYERS' SCORES (IN GLOBAL SCOPE) AND SET INITIAL VALUES TO 0. 
-//     let humanScore = 0;//has to be declared before the round or there's nothing to increment. 
-//     let computerScore = 0; //has to be declared before the round or there's nothing to increment. 
-//     // const humanChoice = getHumanAnswer();
+//     
+//   
 //     let header2Information = document.querySelector("h2");
-//     const resultsAnnouncement = document.querySelector("#resultsAnnouncement");
-//     const playRound = function(humanChoice, computerChoice) {
-//         header2Information.textContent = "The results are in!";
-//         let playerFinalChoices = document.createElement("p");
-//         playerFinalChoices.textContent = `Human: ${humanChoice},PC: ${computerChoice}`;
-//         let result = document.createElement("p");
-//         if(humanChoice === computerChoice){
-            
-//             result.textContent = `It's a draw: both players chose ${humanChoice}`;
-            
-//             }
-//         else if(humanChoice=="rock" && computerChoice == "scissors" || 
-//                 humanChoice == "paper" && computerChoice == "rock" || 
-//                 humanChoice == "scissors" && computerChoice == "paper")
-//                 {
-//                 result.textContent = `Human choice is ${humanChoice} & PC choice is ${computerChoice}: Human wins`;
-//                  humanScore +=1;
-//                 }
-//         else{result.textContent = `Human choice is ${humanChoice} & PC choice is ${computerChoice}: PC wins`;
-//             computerScore +=1;
-//             }
-//         resultsAnnouncement.appendChild(result);
-//         let scoreSummary = document.createElement("p");
-//         scoreSummary.textContent = `The scores a the end of this round: human score is ${humanScore}, pc score is ${computerScore}`;
-//         resultsAnnouncement.appendChild(scoreSummary);    
-//         let playAgain = document.createElement("button");
-//         playAgain.textContent = "Play Again";
-//         let exit = document.createElement("button");
-//         exit.textContent = "Exit";
-//         resultsAnnouncement.appendChild(playAgain); 
-//         resultsAnnouncement.appendChild(exit); 
-//     };  
+//     
 
 
 
 
-// const getComputerAnswer = function(){
-//     let num = Math.ceil(Math.random()*3);
-//     let computerAnswer;
-//     switch(num){
-//     case 1: 
-//         computerAnswer = "rock";
-//         break;
-//     case 2:
-//         computerAnswer = "paper"; 
-//         break; 
-//     case 3:
-//         computerAnswer = "scissors";
-//         break;
-//     default:
-//         computerAnswer = "unknown";
-//     }
-//     return computerAnswer;
-// };
+
 
 // let humanChoice = "";
 // const choiceButton = document.querySelectorAll(".choiceButton");
@@ -225,53 +244,4 @@
 // const paperButton = document.querySelector("#paperButton");
 // const scissorsButton = document.querySelector("#scissorsButton");
 // const announceSelections = document.querySelector("#announceSelections");
-
-// function humanChoiceFunction(button, choice){
-
-// button.addEventListener("click", ()=>{
-//     announceSelections.innerHTML = "";
-//     button.style.backgroundColor = "blue";
-//     const para = document.createElement("p");
-//     para.textContent = "";
-//     para.textContent = `You chose: ${choice} - Are you happy with this choice?`;
-//     announceSelections.appendChild(para);
-//    const yesButton = document.createElement("button");
-//     const noButton = document.createElement("button");
-//     yesButton.textContent = "👍Yes";
-//     noButton.textContent = "👎No";
-//     announceSelections.appendChild(para);
-//     announceSelections.appendChild(yesButton);
-//     announceSelections.appendChild(noButton);
-//     yesButton.addEventListener("click",()=>{
-//     let confirmSelection = document.createElement("p");
-//     confirmSelection.textContent = `Great! Your final choice is ${choice} - Press the button when you're ready to go!`;
-//     announceSelections.appendChild(confirmSelection);
-//     para.textContent = "";
-//     yesButton.remove();
-//     noButton.remove();
-//     let playButton = document.createElement("button");
-//     playButton.textContent = "Play round";
-//     announceSelections.appendChild(playButton);
-//     humanChoice = choice;
-//     playButton.addEventListener("click",()=>{
-//         playButton.remove();
-//         choiceButton.forEach(button => button.style.display="none");
-//         confirmSelection.remove();
-//         playRound(humanChoice,getComputerAnswer());
-
-//     })
-//     ;
-//     });
-//     noButton.addEventListener("click",()=>{
-//         button.style.backgroundColor = "";
-//         para.textContent = "Ok, please pick again";
-//         yesButton.remove();
-//         noButton.remove();
-
-//     } )
-
-// })};
-// humanChoiceFunction(rockButton, "rock");
-// humanChoiceFunction(paperButton, "paper");
-// humanChoiceFunction(scissorsButton, "scissors");
 
