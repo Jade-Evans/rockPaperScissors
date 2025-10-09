@@ -187,3 +187,12 @@ const pcChoiceImage = document.getElementById(pcChoice);
 
 This approach is cleaner for my current level and avoids DOM dependency issues. I can always refactor later to reuse DOM nodes more elegantly — but for now, this keeps my logic readable, reliable, and fun to build on.
 
+🧠 Optional learning log entry
+I simplified my PC image logic by dynamically assigning the image source using:
+PCChoiceImage.src = `imgs/${PCChoice}.png`;
+
+
+This works because my filenames match the choice IDs. It avoids DOM queries and keeps the flow clean and readable.
+
+
+

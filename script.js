@@ -1,24 +1,44 @@
-    const contentContainer = document.querySelector("#contentContainer");
-    const mainTitle = document.querySelector(".mainTitle");
-    const welcomeToHeader = document.querySelector("#welcomeToHeader");
-    const gameIcon = document.querySelector("#gameIcon");
-    const enterNameForm = document.querySelector("#enterNameForm");
-    const submitPlayerNameButton = document.querySelector("#submitPlayerNameButton");
-    const inputPlayerName = document.querySelector("#inputPlayerName");
-    const errorMessage = document.createElement("p");
-    errorMessage.textContent = "Error: please enter name to continue";
-    errorMessage.style.color = "#630909";
-    const themeOptionsContainer = document.querySelector("#themeOptionsContainer");
-    const playTheme = document.querySelectorAll(".playTheme");
-    const resultsAnnouncement = document.querySelector("#resultsAnnouncement");
-    let playerName;
-    let currentTheme;
+// 🖼️ DOM Elements: Main UI
+const contentContainer = document.querySelector("#contentContainer");
+const mainTitle = document.querySelector(".mainTitle");
+const welcomeToHeader = document.querySelector("#welcomeToHeader");
+const gameIcon = document.querySelector("#gameIcon");
+
+// 🧑‍🎓 DOM Elements: Player Name Input
+const enterNameForm = document.querySelector("#enterNameForm");
+const submitPlayerNameButton = document.querySelector("#submitPlayerNameButton");
+const inputPlayerName = document.querySelector("#inputPlayerName");
+
+// ⚠️ DOM Elements: Error Message
+const errorMessage = document.createElement("p");
+errorMessage.textContent = "Error: please enter name to continue";
+errorMessage.style.color = "#630909";
+
+// 🎨 DOM Elements: Theme Selection
+const themeOptionsContainer = document.querySelector("#themeOptionsContainer");
+const playTheme = document.querySelectorAll(".playTheme");
+
+// 📣 DOM Elements: Results Display
+const resultsAnnouncement = document.querySelector("#resultsAnnouncement");
+
+// 🎮 Game State Variables
+let playerName;
+let currentTheme;
+let PCAnswer;
+let PCChoice;
+let randomIndex;
+let humanChoice = null;
+
+// 🖼️ Image Elements
+let humanChoiceImage = null;
+const PCChoiceImage = document.createElement("img");
+PCChoiceImage.classList.add("PCChoiceImage");
+
+// 🕹️ DOM Elements: Choice Submission
+let choiceSubmitButton;
     
-    let choiceSubmitButton;
-    let humanChoice = null;
-    let humanChoiceImage = null;
-    let PCChoiceImage = document.createElement("img");
-    PCChoiceImage.classList.add("PCChoiceImage");
+    
+
     const getPCChoiceButton = document.createElement("button");
     getPCChoiceButton.classList.add("getPCChoiceButton");
     
@@ -47,12 +67,13 @@
         vsImageContainer.appendChild(vs);
        
         PCChoiceImage.src = "imgs/questionMark.png";
+        PCChoiceImage.style.opacity="50%";
         vsImageContainer.appendChild(PCChoiceImage);
         
     };
 
     const classicArray = ["rock", "paper","scissors"];
-    const magicArray = ["wand","potion","crystal ball"];
+    const magicArray = ["wand","potion","crystalball"];
     const dinoArray = ["trex", "triceratops", "pterodactyl"];
     const heroArray = ["strength", "smarts", "speed"];
 
@@ -75,8 +96,8 @@
                 console.log("WARNING: No theme or unknown theme detected!")
                 return null;
         }
-        let randomIndex = Math.floor(Math.random()*themeChoiceOptions.length);//or times themeChoiceOptions.length() if varying options in future//
-        let PCAnswer = themeChoiceOptions[randomIndex];
+        randomIndex = Math.floor(Math.random()*themeChoiceOptions.length);//or times themeChoiceOptions.length() if varying options in future//
+        PCAnswer = themeChoiceOptions[randomIndex];
         console.log("PCAnswer:", PCAnswer)
         return PCAnswer;
     };
@@ -169,38 +190,40 @@
         })
     }
 
-submitPlayerNameButton.addEventListener("click",(event)=>{
-        event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
-    if(!inputPlayerName.value){
-    contentContainer.appendChild(errorMessage);
-    }
-    else{
-        playerName = inputPlayerName.value;
-        contentContainer.innerHTML="";
-        chooseAThemePage();
-    }
-}); 
+    submitPlayerNameButton.addEventListener("click",(event)=>{
+            event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
+        if(!inputPlayerName.value){
+        contentContainer.appendChild(errorMessage);
+        }
+        else{
+            playerName = inputPlayerName.value;
+            contentContainer.innerHTML="";
+            chooseAThemePage();
+        }
+    }); 
 
 
 getPCChoiceButton.addEventListener("click",()=>{
     console.log("Get computer choice button was clicked.")
-    let PCChoice = getPCAnswer();
-    if(!PCChoice){
-        console.log("warning no PC answer generated")
-    }
-    const announcePCSelection = document.createElement("p");
-    announcePCSelection.textContent = `PC Chose ${PCChoice.toUpperCase()}`;
-    contentContainer.appendChild(announcePCSelection);
-    PCChoiceImage.src = `imgs/${PCChoice}.png`;
-    getPCChoiceButton.disabled=true;
-
+    playRound(humanChoice,PCChoice);
+   
 });      
 
-// const playRound = function(humanChoice, PCChoice) {
-//         header2Information.textContent = "The results are in!";
-//         let playerFinalChoices = document.createElement("p");
-//         playerFinalChoices.textContent = `Human: ${humanChoice},PC: ${PCChoice}`;
-//         let result = document.createElement("p");
+const playRound = function(humanChoice, PCChoice) {
+    PCChoice = getPCAnswer();
+    if(!PCChoice){
+        console.log("warning no PC answer generated");
+        return;
+    }
+    const announcePCSelection = document.createElement("p");
+    announcePCSelection.textContent = `The results are in! PC Chose: ${PCChoice.toUpperCase()}!`;
+    contentContainer.appendChild(announcePCSelection);
+    PCChoiceImage.src = `imgs/${PCChoice}.png`;
+    PCChoiceImage.alt = PCAnswer;
+    PCChoiceImage.style.opacity="100%";
+    PCChoiceImage.classList.add(`choice${randomIndex + 1}`); // choice1, choice2, choice3
+    getPCChoiceButton.disabled=true;
+    let result = document.createElement("p");
 //         if(humanChoice === PCChoice){
             
 //             result.textContent = `It's a draw: both players chose ${humanChoice}`;
@@ -227,33 +250,4 @@ getPCChoiceButton.addEventListener("click",()=>{
 //         resultsAnnouncement.appendChild(playAgain); 
 //         resultsAnnouncement.appendChild(exit); 
 //     };  
-
-            
-                            
-              
-        
-    
-        
-  
-    
-    
-    
-    
-//     //4. DEFINE VARIABLES FOR THE TWO PLAYERS' SCORES (IN GLOBAL SCOPE) AND SET INITIAL VALUES TO 0. 
-//     
-//   
-//     let header2Information = document.querySelector("h2");
-//     
-
-
-
-
-
-
-// let humanChoice = "";
-// const choiceButton = document.querySelectorAll(".choiceButton");
-// const rockButton = document.querySelector("#rockButton");
-// const paperButton = document.querySelector("#paperButton");
-// const scissorsButton = document.querySelector("#scissorsButton");
-// const announceSelections = document.querySelector("#announceSelections");
-
+}
