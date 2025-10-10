@@ -84,6 +84,8 @@ span{
 .instructions{
     text-align: left;
 }
+
+
 .choiceOptionsContainer img, .humanChoiceImage, .PCChoiceImage{
     height:80px;
     width:80px;
@@ -91,6 +93,10 @@ span{
     box-shadow: 5px 5px 0px rgba(0, 38, 77, 0.25);
     border-radius: 8px;
     margin: 10px;
+}
+
+.gameTitle{
+    display: none;
 }
 .vsImageContainer{
     display:flex;

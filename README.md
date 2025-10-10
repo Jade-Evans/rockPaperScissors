@@ -196,3 +196,78 @@ This works because my filenames match the choice IDs. It avoids DOM queries and 
 
 
 
+🧠 Dynamic Element Selection: Theme-Based Choice Containers
+Overview
+Each game theme (e.g., Classic, Hero, Magic) presents a unique set of choice icons — like Rock, Paper, Scissors for Classic, or themed equivalents for others. These icons are now revealed at a later stage in the game to improve flow and clarity.
+Refactor Context
+Originally, the choice icons were displayed immediately when a theme was selected. This worked fine, but as the game logic evolved, I moved the icon reveal into a separate function to better control pacing and user experience. This change introduced confusion: my previous selection logic relied on DOM proximity and structure, which broke once the display logic was decoupled.
+Challenge
+After the refactor, I struggled to reliably identify and display the correct set of choice icons. My early logic used generic class selectors and nested queries, but these became fragile and hard to debug once the icons were no longer directly tied to the theme selection flow.
+Solution
+To simplify and clarify the selection process, I added specific HTML identifiers for each theme’s choice container:
+- classicChoices
+- heroChoices
+- magicChoices
+- etc.
+This allowed me to use a clean, readable JavaScript selector:
+const availableChoicesForTheme = document.querySelector(`#${currentTheme}Choices`);
+contentContainer.appendChild(availableChoicesForTheme);
+availableChoicesForTheme.style.display = "block";
+
+
+Reflection
+This experience reminded me how important it is to pause and think through the overall gameflow and design before diving into implementation. The muddle I hit wasn’t just about selectors — it was about shifting logic without fully mapping how elements would be accessed later. In future refactors, I want to spend more time sketching the flow and dependencies so I can anticipate these breakages and design around them. It’s helping me build a more thoughtful, scalable mindset.
+Why This Matters
+At this stage in my learning, reducing ambiguity is key. Adding unique IDs gave me confidence in my logic and made the code easier to read, debug, and extend. It also fits my trio-based design style: each theme has its own distinct set of choices, and now each one is easy to grab and display — even when revealed later in the game.
+Next Steps
+As I grow more comfortable with dynamic DOM manipulation, I may refactor this into a reusable function or explore more scalable patterns. For now, this solution supports clarity, momentum, and modularity — exactly what I need.
+
+Would you like a matching commit message like refactor: add theme-specific choice IDs for clearer selection logic? I can help you phrase it with your usual flair.
+📝 README Update: Gameflow Refactor
+🎮 Refactor Overview
+To support smoother gameplay and prepare for a best-of-three round system, I refactored the gameflow to merge the round logic — including human choice, PC choice, and result — into a single unified view. Previously, these elements were handled in separate stages, which made the experience feel fragmented and harder to extend.
+🔄 What Changed
+- Moved the display of choice icons into a later stage of the game, triggered after theme selection and instruction reveal.
+- Began merging round logic (player choice, PC choice, result display) into one cohesive function to streamline repeated rounds.
+- Introduced theme-specific IDs (e.g., classicChoices, heroChoices) to simplify dynamic selection now that the display logic is decoupled.
+🧠 Reflection
+This refactor surfaced a key insight: when restructuring gameflow, it’s important to map out how elements will be accessed and reused. I got muddled trying to dynamically select containers that were no longer in the same place — a problem that didn’t exist before the refactor. Adding specific identifiers helped, but I’ve learned to spend more time upfront thinking through the overall design and dependencies before diving into implementation.
+🚧 Next Steps
+- Finalize the best-of-three round logic with score tracking and round transitions.
+- Consider modularizing the round display logic for clarity and reuse.
+- Continue documenting trade-offs and partial solutions to support maintainability.
+
+Would you like help drafting a roundLogic.js module or a visual flow diagram to anchor your next steps? I can also help you write a README snippet for the scoring system once it’s in place.
+🧠 Learning Log: Requerying and Cloning DOM Elements
+Date: 10 Oct 2025
+Focus: Making theme icons reusable across rounds using requerying and cloning
+
+✅ What I learned
+- Requerying means using document.querySelector(...) again to grab fresh DOM elements after the page changes.
+- Example:
+const themeIcons = document.querySelector(`#${currentTheme}ChoiceIcons`);
+- This ensures I’m working with the correct theme icons after the user picks a theme.
+- Cloning is useful when I want to reuse HTML-defined elements without removing the originals.
+- If I append the original icons and then clear the container (contentContainer.innerHTML = ""), they’re gone.
+- Cloning preserves the original and gives me a safe copy to use:
+const iconsClone = originalIcons.cloneNode(true);
+contentContainer.appendChild(iconsClone);
+- I must requery possibleChoices from the clone, not from a stale global:
+const possibleChoices = iconsClone.querySelectorAll("img");
+- Cloning also lets me safely append a selected image to the VS screen without removing it from the choice container:
+humanChoiceImage = selectedImage.cloneNode(true);
+🧠 Learning Log: Requerying, Cloning & Theme Complexity
+Date: 10 Oct 2025
+Focus: Refactoring for multi-theme support and reusable DOM elements
+
+Adding multiple themes introduced unexpected complexity to my game logic — especially around DOM reuse across rounds. I didn’t initially realise how this would require requerying theme-specific elements and cloning HTML nodes to avoid stale references and broken interactions.
+This section of the project was heavily supported by AI guidance, as I got in over my head with the lifecycle of DOM elements and how clearing containers affects original nodes. That said, I didn’t copy-paste solutions — I explored, tested, and iterated with support, and I now have a much clearer understanding of:
+- Why requerying is essential when working with dynamic themes
+- How cloning preserves original HTML elements for reuse
+- Why passing DOM elements as parameters avoids stale globals
+- How modular logic improves round-to-round consistency
+I can’t say I fully understand every nuance yet, but this exposure has given me insight into structural considerations I wouldn’t have encountered otherwise. It’s been a valuable stretch, and I feel better equipped to handle more complex UI logic going forward.
+
+
+
+

@@ -1,8 +1,19 @@
 // 🖼️ DOM Elements: Main UI
 const contentContainer = document.querySelector("#contentContainer");
+const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
 const mainTitle = document.querySelector(".mainTitle");
 const welcomeToHeader = document.querySelector("#welcomeToHeader");
-const gameIcon = document.querySelector("#gameIcon");
+const gameIcon = document.querySelector(".gameIcon");
+const gameTitle = document.querySelector(".gameTitle");
+let clickToPlayBestOfThree = document.createElement("button");
+
+// let availableChoicesForChosenTheme;
+
+//;
+const gameRules = document.querySelector(`.gameRules`);
+const choiceOptionsContainer = document.querySelector( `.choiceOptionsContainer`);
+const playerVsPCInstruction = document.createElement("p"); 
+
 
 // 🧑‍🎓 DOM Elements: Player Name Input
 const enterNameForm = document.querySelector("#enterNameForm");
@@ -28,49 +39,104 @@ let PCAnswer;
 let PCChoice;
 let randomIndex;
 let humanChoice = null;
+let clonedThemeButton;
 
 // 🖼️ Image Elements
-let humanChoiceImage = null;
+let humanChoiceImage;
 const PCChoiceImage = document.createElement("img");
 PCChoiceImage.classList.add("PCChoiceImage");
 
-// 🕹️ DOM Elements: Choice Submission
-let choiceSubmitButton;
     
 const getPCChoiceButton = document.createElement("button");
 getPCChoiceButton.classList.add("getPCChoiceButton");
 
 let humanScore = 0;//has to be declared globally or there's nothing to increment each round. //
-let PCScore = 0; //as above //   
+let PCScore = 0; //as above //  
+let roundCounter = 0; 
 
 
     
 const playerVsPCPage = function(){
+    const originalIcons = document.querySelector(`#${currentTheme}ChoiceIcons`);
+    if (!originalIcons) {//REQUERIED AVAILABLECHOICEICONS SO NOT STALE, CAN BE CLONED TO RETAIN CURRENT THEME//
+        console.error("Missing icons for theme:", currentTheme);
+    return;
+    }
+    
+    
+
+    
+    // ✅ Step 2: Clone them//
+    const iconsClone = originalIcons.cloneNode(true);
+
     contentContainer.innerHTML="";
+    
+    contentContainer.appendChild(iconsClone);
+    
+    playTheme.forEach(container =>{
+        container.style.display = "none";
+    })
     const playerVsPCTitle=document.createElement("h2");
-    playerVsPCTitle.textContent=`${playerName}, You have chosen: ${humanChoice.toUpperCase()}!`;;
+    playerVsPCTitle.textContent=`Welcome, ${playerName}, please select from the options below:`;
     contentContainer.appendChild(playerVsPCTitle); 
-    const playerVsPCInstruction = document.createElement("p"); 
-    playerVsPCInstruction.textContent="When you're ready, press the button below to get your opponent's choice and see who wins!"
-    playerVsPCInstruction.style.margin = "15px";
-    contentContainer.appendChild(playerVsPCInstruction); 
-    contentContainer.appendChild(getPCChoiceButton);
-    getPCChoiceButton.textContent="Get PC Choice";
     
-    const vsImageContainer = document.createElement("div");
-    contentContainer.appendChild(vsImageContainer);
-    vsImageContainer.classList.add("vsImageContainer");
-    vsImageContainer.appendChild(humanChoiceImage);
-    humanChoiceImage.classList.add("humanChoiceImage");
-    const vs = document.createElement("p");
-    vs.textContent="VS";
-    vsImageContainer.appendChild(vs);
+    console.log(`${currentTheme}!`);
+    // contentContainer.appendChild(availableChoiceIcons);
+    // choiceOptionsContainer.style.display="block";
+    const confirmChoice = document.createElement("button");
+    confirmChoice.textContent = "Confirm Choice";
+    contentContainer.appendChild(confirmChoice);
+    confirmChoice.disabled=true;
     
-    PCChoiceImage.src = "imgs/questionMark.png";
-    PCChoiceImage.style.opacity="50%";
-    vsImageContainer.appendChild(PCChoiceImage);
-    
+    const possibleChoices = iconsClone.querySelectorAll("img");//UPDATES/REQUERIES POSSIBLE CHOICE TO WORK WITH
+    //THE REQUERIED ICONS//
+
+    possibleChoices.forEach((choice)=>{
+        choice.addEventListener("click", ()=>{
+            humanChoice = choice.id;
+            humanChoiceImage = choice;
+            console.log(`Human chose ${humanChoice}`);
+             choice.style.height="120px";
+             choice.style.width="120px";
+             confirmChoice.disabled=false;
+        })
+        
+    });
+    confirmChoice.addEventListener("click", ()=>{
+        contentContainer.innerHTML="";
+        const yourChoice = document.createElement("h2");
+        yourChoice.textContent=`${playerName}, You've Chosen ${humanChoice}`;
+        contentContainer.appendChild(yourChoice);
+        const vsImageContainer = document.createElement("div");
+        contentContainer.appendChild(vsImageContainer);
+        vsImageContainer.classList.add("vsImageContainer");
+        vsImageContainer.appendChild(humanChoiceImage);
+        humanChoiceImage.classList.add("humanChoiceImage");
+        const vs = document.createElement("p");
+        vs.textContent="VS";
+        vsImageContainer.appendChild(vs);
+        
+        PCChoiceImage.src = "imgs/questionMark.png";
+        PCChoiceImage.style.opacity="50%";
+        const clonedPCChoiceImage = PCChoiceImage.cloneNode(true);
+        vsImageContainer.appendChild(clonedPCChoiceImage);
+        playerVsPCInstruction.textContent="When you're ready, press the button below to get your opponent's choice and see who wins!"
+        playerVsPCInstruction.style.margin = "15px";
+        contentContainer.appendChild(playerVsPCInstruction); 
+        const clonedgetPCChoiceButton = getPCChoiceButton.cloneNode(true);
+        contentContainer.appendChild(clonedgetPCChoiceButton);
+        clonedgetPCChoiceButton.addEventListener("click",()=>{
+            console.log("Get computer choice button was clicked.")
+            playRound(humanChoice,PCChoice,clonedPCChoiceImage, clonedgetPCChoiceButton);
+        
+        }); 
+        clonedgetPCChoiceButton.textContent="Get PC Choice";
+        
+ 
+    })
 };
+    
+    
 
 const classicArray = ["rock", "paper","scissors"];
 const magicArray = ["wand","potion","crystalball"];
@@ -103,6 +169,7 @@ const getPCAnswer = function(){
 };
     
 const chooseAThemePage = function(){
+    console.log("chooseAThemePage executed")
     contentContainer.innerHTML="";
         const welcomeText = document.createElement("p");
         welcomeText.textContent = `✨🌸Hi, ${playerName}!✨🌸`;
@@ -116,15 +183,19 @@ const chooseAThemePage = function(){
         const allThemeButtons = document.querySelectorAll(".themeButton");
         allThemeButtons.forEach((button)=>{
             button.addEventListener("click", ()=>{
+                currentTheme=button.alt;
+                console.log(`Current theme is: ${currentTheme}`);
+                let availableChoiceIcons = document.querySelector(`#${currentTheme}ChoiceIcons`);
                 contentContainer.innerHTML = "";
                 const backButton = document.createElement("button");
                 backButton.textContent = "Return to Theme Options";
                 backButton.classList.add("returnToThemeButton");
                 backButton.addEventListener("click",()=>{chooseAThemePage()});
                 contentContainer.insertBefore(backButton, contentContainer.firstChild);
-                choiceSubmitButton = document.createElement("input");
+                clickToPlayBestOfThree = document.createElement("button");
+                clickToPlayBestOfThree.textContent="Click to Play";
                 contentContainer.appendChild(welcomeToHeader);
-                const clonedThemeButton = button.cloneNode(true);
+                clonedThemeButton = button.cloneNode(true);
                 clonedThemeButton.alt=button.alt;
                 clonedThemeButton.style.width = "150px";
                 clonedThemeButton.style.height = "150px";
@@ -141,6 +212,8 @@ const chooseAThemePage = function(){
                     else if(button.alt==="hero"){
                         contentContainer.style.backgroundColor = "red";  
                     }
+                // let availableChoicesForChosenTheme = document.querySelector( `${currentTheme}Play .choiceOptionsContainer`);
+                // console.log(availableChoicesForChosenTheme);
                 contentContainer.appendChild(clonedThemeButton);
                 const clickToBegin = document.createElement("p");
                 clickToBegin.textContent = "(Click above to start your adventure!👆👆✨)";
@@ -150,66 +223,50 @@ const chooseAThemePage = function(){
                 welcomeToHeader.style.fontSize = "16px";
                 welcomeToHeader.style.marginTop ="20px";
                 clonedThemeButton.addEventListener("click",()=>{
-                    choiceSubmitButton.type = "submit";
-                    choiceSubmitButton.value = "SUBMIT"; // Optional label
-                    choiceSubmitButton.classList.add("choiceSubmitButton");
-                    choiceSubmitButton.disabled=true;//only enables submit later after an icon is chosen. 
-                    choiceSubmitButton.addEventListener("click",()=>{
-                        console.log("submit button clicked");
-                        playerVsPCPage();
-                        console.log("button to generate PC choice was clicked");
-                    }
-                ); 
+                    contentContainer.innerHTML="";
+                    contentContainer.appendChild(gameTitle);
+                    gameTitle.style.display="block";
+                    let rules = document.querySelector(`#${currentTheme}Rules`);
+                    contentContainer.appendChild(rules);
+                    rules.style.display="block";
 
-                
-                currentTheme = clonedThemeButton.alt;
-                let displayedTheme = document.querySelector(`#${currentTheme}Play`);
-                playTheme.forEach(container =>{
-                    container.style.display = "none";
-                });
-                displayedTheme.style.display="block";
-                contentContainer.appendChild(displayedTheme);
-                clonedThemeButton.style.width="80px";
-                clonedThemeButton.style.height="80px";
-                clickToBegin.remove();
-                welcomeToHeader.remove();
-                contentContainer.appendChild(choiceSubmitButton);
-            });    
-            const possibleChoices = document.querySelectorAll(".choiceOptionsContainer img");
-            possibleChoices.forEach((choice)=>{
-                choice.addEventListener("click", ()=>{
-                    humanChoice = choice.id;
-                    humanChoiceImage = choice.cloneNode(true);
-                    console.log(humanChoice);
-                    choiceSubmitButton.disabled=false;
-                    choiceSubmitButton.style.border="5px solid black";
-                });
+                    contentContainer.appendChild(clickToPlayBestOfThree);
+                    clickToPlayBestOfThree.value= "PLAY BEST OF THREE"; 
+                    clickToPlayBestOfThree.style.margin = "20px";
+                    clickToPlayBestOfThree.classList.add("clickToPlayBestOfThree");
+                    clickToPlayBestOfThree.addEventListener("click",()=>{
+
+                        roundCounter +=1;
+                        console.log(`round ${roundCounter} has begun`);
+                        playerVsPCPage();
+                    })
+                }); 
             });
-                                                            
         });
-    })
 }
 
-submitPlayerNameButton.addEventListener("click",(event)=>{
-        event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
-    if(!inputPlayerName.value){
-    contentContainer.appendChild(errorMessage);
-    }
-    else{
-        playerName = inputPlayerName.value;
-        contentContainer.innerHTML="";
-        chooseAThemePage();
-    }
-}); 
+
+    submitPlayerNameButton.addEventListener("click",(event)=>{
+        console.log("submitPlayerName executed");
+            event.preventDefault();//required to stop form default refreshing the page and losing welcome message//
+        if(!inputPlayerName.value){
+        contentContainer.appendChild(errorMessage);
+        }
+        else{
+            playerName = inputPlayerName.value;
+            contentContainer.innerHTML="";
+            chooseAThemePage();
+        }
+    }); 
 
 
-getPCChoiceButton.addEventListener("click",()=>{
-    console.log("Get computer choice button was clicked.")
-    playRound(humanChoice,PCChoice);
-   
-});      
+     
 
-const playRound = function(humanChoice, PCChoice) {
+const playRound = function(humanChoice, PCChoice, PCImageElement, pcChoiceButtonElement) {
+    roundCounter++;
+    console.log(`this is round ${roundCounter}`);
+    getPCChoiceButton.remove();
+    playerVsPCInstruction.remove();
     PCChoice = getPCAnswer();
     if(!PCChoice){
         console.log("warning no PC answer generated");
@@ -218,15 +275,15 @@ const playRound = function(humanChoice, PCChoice) {
     const announcePCSelection = document.createElement("h2");
     announcePCSelection.textContent = `PC has chosen... ${PCChoice.toUpperCase()}!`;
     contentContainer.appendChild(announcePCSelection);
-    PCChoiceImage.src = `imgs/${PCChoice}.png`;
-    PCChoiceImage.alt = PCAnswer;
-    PCChoiceImage.style.opacity="100%";
-    PCChoiceImage.classList.add(`choice${randomIndex + 1}`); // choice1, choice2, choice3
-    getPCChoiceButton.disabled=true;
+    PCImageElement.src = `imgs/${PCChoice}.png`;
+    PCImageElement.alt = PCAnswer;
+    PCImageElement.style.opacity="100%";
+    PCImageElement.classList.add(`choice${randomIndex + 1}`); // choice1, choice2, choice3
+    pcChoiceButtonElement.disabled=true;
     let result = document.createElement("p");
     contentContainer.appendChild(result);
     const humanClass = [...humanChoiceImage.classList].find(cls => cls.startsWith("choice"));
-    const PCClass = [...PCChoiceImage.classList].find(cls=>cls.startsWith("choice"));
+    const PCClass = [...PCImageElement.classList].find(cls=>cls.startsWith("choice"));
     
     if (humanClass === PCClass) {
     result.textContent = `It's a draw - you each win ONE POINT! `;
@@ -235,8 +292,8 @@ const playRound = function(humanChoice, PCChoice) {
     PCScore += 1;
     humanChoiceImage.style.border ="4px gold solid";
     humanChoiceImage.style.boxShadow = "0 0 14px gold";
-    PCChoiceImage.style.border ="4px gold solid";
-    PCChoiceImage.style.boxShadow = "0 0 14px gold";
+    PCImageElement.style.border ="4px gold solid";
+    PCImageElement.style.boxShadow = "0 0 14px gold";
     }
 
     else if (
@@ -244,36 +301,42 @@ const playRound = function(humanChoice, PCChoice) {
         humanClass === "choice2" && PCClass === "choice1" ||
         humanClass === "choice3" && PCClass === "choice2"
         ) {
-        result.textContent = ` ${humanChoice} beats ${PCChoice} - Congratulations ${playerName}! You win this round and gain ONE POINT!`;
+        result.textContent = ` ${humanChoice.toUpperCase()} beats ${PCChoice.toUpperCase()} - Congratulations ${playerName}! You win this round and gain ONE POINT!`;
         humanScore += 1;
         console.log("Human wins");
         humanChoiceImage.style.border ="4px gold solid";
         humanChoiceImage.style.boxShadow = "0 0 14px gold";
-        PCChoiceImage.style.border ="4px red solid";
-        PCChoiceImage.style.boxShadow = "0 0 14px red";
-        PCChoiceImage.style.opacity="40%";
+        PCImageElement.style.border ="4px red solid";
+        PCImageElement.style.boxShadow = "0 0 14px red";
+        PCImageElement.style.opacity="40%";
     }
     else {
-        result.textContent = `${PCChoice} beats ${humanChoice} - commiserations, ${playerName}, the PC wins this round and earns ONE POINT!`;
+        result.textContent = `${PCChoice.toUpperCase()} beats ${humanChoice.toUpperCase()} - commiserations, ${playerName}, the PC wins this round and earns ONE POINT!`;
         PCScore += 1;
         console.log("PC Wins");
         humanChoiceImage.style.border ="4px red solid";
         humanChoiceImage.style.boxShadow = "0 0 14px red";
         humanChoiceImage.style.opacity="40%";
-        PCChoiceImage.style.border ="4px gold solid";
-        PCChoiceImage.style.boxShadow = "0 0 14px gold";
+        PCImageElement.style.border ="4px gold solid";
+        PCImageElement.style.boxShadow = "0 0 14px gold";
     }
+        let nextRoundBtn = document.createElement("button");
+        nextRoundBtn.textContent = "Play Next Round";
+        
+
+        nextRoundBtn.addEventListener("click",()=>{
+            playerVsPCPage();
+            console.log("Current theme before next round:", currentTheme);
+        });
+        contentContainer.appendChild(nextRoundBtn);
+
+    
+    contentContainer.style.gap="20px";
+    
 
 };
-//         resultsAnnouncement.appendChild(result);
-//         let scoreSummary = document.createElement("p");
-//         scoreSummary.textContent = `The scores a the end of this round: human score is ${humanScore}, PC score is ${PCScore}`;
-//         resultsAnnouncement.appendChild(scoreSummary);    
-//         let playAgain = document.createElement("button");
-//         playAgain.textContent = "Play Again";
-//         let exit = document.createElement("button");
-//         exit.textContent = "Exit";
-//         resultsAnnouncement.appendChild(playAgain); 
-//         resultsAnnouncement.appendChild(exit); 
-//     };  
+
+
+   
+
 
