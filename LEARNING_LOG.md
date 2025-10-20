@@ -84,5 +84,8 @@ const possibleChoices = iconsClone.querySelectorAll("img");
 - Emotional Milestone: Trusted my instincts, asked smart questions, and documented trade-offs.
 - Structural Stretch: Learned why requerying, cloning, and modular logic matter — even if I don’t fully grasp every nuance yet.
 - Simplicity Reminder: Stick to core requirements first. Enhancements can unravel into deeper challenges if the foundation isn’t solid.
+PLEASE NOTE:
+✍️ This log was drafted with AI support to help structure and capture my learning. All insights and experiences are my own, and I plan to refine the tone over time
+
 
 
