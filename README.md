@@ -267,6 +267,9 @@ This section of the project was heavily supported by AI guidance, as I got in ov
 - Why passing DOM elements as parameters avoids stale globals
 - How modular logic improves round-to-round consistency
 I can’t say I fully understand every nuance yet, but this exposure has given me insight into structural considerations I wouldn’t have encountered otherwise. It’s been a valuable stretch, and I feel better equipped to handle more complex UI logic going forward.
+🧩 Reflection: Stick to the Requirements
+This section reminded me how important it is to stick to the core requirements, especially for top-level projects. I thought adding multiple themes would be a simple enhancement — but it introduced hidden complexity I hadn’t anticipated, especially around DOM lifecycle, requerying, and cloning.
+Even when something seems doable, it can unravel into a deeper structural challenge. I’ve learned that it’s often better to build the core experience cleanly first, and only expand once the foundation is solid. This experience has made me more mindful of scope creep and the value of simplicity in early iterations.
 
 
 

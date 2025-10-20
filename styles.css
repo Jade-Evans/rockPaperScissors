@@ -98,6 +98,19 @@ span{
 .gameTitle{
     display: none;
 }
+.gameRules{
+    text-align: left;
+    background-color: antiquewhite;
+    color: darkcyan;
+    padding: 8px;
+    border-radius: 5px;
+    border: 2px rgb(82, 117, 82) solid;
+    margin-top: 15px;
+}
+.rulesList li{
+    text-align: left;
+    text-decoration: double;
+}
 .vsImageContainer{
     display:flex;
     justify-content:space-between;
@@ -105,11 +118,18 @@ span{
     gap: 20px;
 }
 .vsImageContainer img{
-    height:150px;
-    width:150px;
+    height:120px;
+    width:120px;
     border: 2px solid blue;
     box-shadow: 5px 5px 0px rgba(0, 38, 77, 0.25);
     border-radius: 8px;
     margin: 10px;
 
+}
+.roundResultContainer{
+    background-color: rgb(237, 218, 193);
+    color: purple;
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 30px;
 }
